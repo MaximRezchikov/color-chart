@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProducerServiceImpl implements ProducerService {
@@ -31,7 +33,12 @@ public class ProducerServiceImpl implements ProducerService {
 
   @Override
   @Transactional(propagation = Propagation.REQUIRES_NEW)
-  public Producer get(Long producerId) {
+  public Producer getOne(Long producerId) {
     return producerRepository.getOne(producerId);
+  }
+
+  @Override
+  public List<Producer> getAllProducer() {
+    return producerRepository.findAll();
   }
 }
