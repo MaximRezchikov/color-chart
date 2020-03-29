@@ -14,4 +14,6 @@ public class PaintForm {
   private Long color;
 
   private Long serialNumber;
+
+  private Long producerId;
 }

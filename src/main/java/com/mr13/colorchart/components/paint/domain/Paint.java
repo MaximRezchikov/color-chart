@@ -36,10 +36,13 @@ public class Paint {
 
   private Long color;
 
+  @Column(name = "producer_id")
+  private Long producerId;
+
   @Column(name = "serial_number")
   private Long serialNumber;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "producer_id")
+  @JoinColumn(name = "producer_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Producer producer;
 }

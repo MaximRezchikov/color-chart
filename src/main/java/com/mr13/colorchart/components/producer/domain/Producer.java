@@ -1,8 +1,10 @@
 package com.mr13.colorchart.components.producer.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mr13.colorchart.components.paint.domain.Paint;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +23,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Producer {
@@ -35,6 +38,7 @@ public class Producer {
 
   private String country;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<Paint> paints;
 }
