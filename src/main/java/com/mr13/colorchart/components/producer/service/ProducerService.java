@@ -12,4 +12,8 @@ public interface ProducerService {
   Producer getOne(Long producerId);
 
   List<Producer> getAllProducer();
+
+  Producer update(Long producerId, ProducerForm producerForm);
+
+  void delete(Long producerId);
 }

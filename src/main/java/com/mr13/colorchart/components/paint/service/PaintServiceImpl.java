@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PaintServiceImpl implements PaintService {
@@ -34,5 +36,15 @@ public class PaintServiceImpl implements PaintService {
         .build();
 
     return paintRepository.save(paint);
+  }
+
+  @Override
+  public List<Paint> get() {
+    return paintRepository.findAll();
+  }
+
+  @Override
+  public void delete(Long paintId) {
+    paintRepository.deleteById(paintId);
   }
 }
