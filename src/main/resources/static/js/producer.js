@@ -1,6 +1,6 @@
 
 function getIndex(list, id) {
-  for (var i = 0; i < list.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     if (list[i].id === id) {
       return i;
     }
@@ -9,7 +9,7 @@ function getIndex(list, id) {
   return -1;
 }
 
-var producerApi = Vue.resource('/producer{/id}');
+let producerApi = Vue.resource('/producer{/id}');
 
 Vue.component('producer-form', {
   props: ['producers', 'producerAttr'],
@@ -21,7 +21,7 @@ Vue.component('producer-form', {
     }
   },
   watch: {
-    messageAttr: function (newVal, oldVal) {
+    producerAttr: function (newVal, oldVal) {
       this.producerName = newVal.producerName;
       this.country = newVal.country;
       this.id = newVal.id;
@@ -30,12 +30,12 @@ Vue.component('producer-form', {
   template:
       '<div>'
       + '<input type="text" placeholder="enter paint producer name" v-model="producerName" />'
-      + '<input type="text" placeholder="enter producer contry" v-model="country" />'
+      + '<input type="text" placeholder="enter producer country" v-model="country" />'
       + '<input type="button" value="Save" @click="save"/>'
       + '</div>',
   methods: {
     save: function () {
-      var producer = {
+      let producer = {
         producerName: this.producerName,
         country: this.country
       };
@@ -43,7 +43,7 @@ Vue.component('producer-form', {
       if (this.id) {
         producerApi.update({id :this.id}, producer).then(result =>
             result.json().then(data => {
-              var index = getIndex(this.message, data.id);
+              let index = getIndex(this.producers, data.id);
               this.producers.splice(index, 1, data);
               this.producerName = '';
               this.country = '';
@@ -114,7 +114,7 @@ Vue.component('producers-list', {
   }
 });
 
-var app = new Vue({
+let app = new Vue({
   el: '#app',
   template: '<producers-list  :producers="producers" />',
   data: {

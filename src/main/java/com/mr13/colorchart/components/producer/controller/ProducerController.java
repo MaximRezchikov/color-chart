@@ -29,21 +29,21 @@ public class ProducerController {
     return producerService.getAllProducer();
   }
 
-  @GetMapping("{id}")
-  public Producer getOne(@PathVariable Long id) {
-    return producerService.getOne(id);
+  @GetMapping("/{id}")
+  public Producer getOne(@PathVariable("id") Long producerId) {
+    return producerService.getOne(producerId);
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public void saveProducer(@RequestBody ProducerForm producerForm) {
-    producerService.save(producerForm);
+  public Producer saveProducer(@RequestBody ProducerForm producerForm) {
+    return producerService.save(producerForm);
   }
 
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public void updateProducer(@PathVariable("id") Long producerId, @RequestBody ProducerForm producerForm) {
-    producerService.update(producerId, producerForm);
+  public Producer updateProducer(@PathVariable("id") Long producerId, @RequestBody ProducerForm producerForm) {
+    return producerService.update(producerId, producerForm);
   }
 
   @DeleteMapping("/{id}")
