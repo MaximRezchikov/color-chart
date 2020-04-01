@@ -21,9 +21,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
 
     http
+        .antMatcher("/**")
         .authorizeRequests()
-        .mvcMatchers("/").permitAll()
-        .anyRequest().authenticated()
+        .antMatchers("/", "/login", "/webjars/**","/error**")
+        .permitAll()
+        .anyRequest()
+        .authenticated()
         .and()
         .csrf().disable();
   }
