@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Color Chart</title>
   <!-- версия для разработки, отображает полезные предупреждения в консоли -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  <script th:inline="javascript">
+    let frontendData = [[${frontendData}]];
+  </script>
 </head>
 <body>
 <h3>Color chart</h3>
-<h3><a href="/login">Google authorize</a></h3>
-<a href="/producer.html">Add producer</a>
-
+<!--<h3><a href="/login">Google authorize</a></h3>-->
+<!--<a href="/producer.html">Add producer</a>-->
+<div id="appGoogleAuth"></div>
+<script src="/js/googleAuth.js"></script>
 </body>
 </html>
