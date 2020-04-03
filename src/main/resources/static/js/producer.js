@@ -114,8 +114,8 @@ Vue.component('producers-list', {
   }
 });
 
-let app = new Vue({
-  el: '#app',
+let appProd = new Vue({
+  el: '#appProd',
   template: '<producers-list  :producers="producers" />',
   data: {
     producers: []

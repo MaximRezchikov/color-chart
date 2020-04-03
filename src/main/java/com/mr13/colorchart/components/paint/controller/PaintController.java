@@ -32,8 +32,8 @@ public class PaintController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public void createPaint(@RequestBody PaintForm paintForm) {
-    paintService.create(paintForm);
+  public Paint createPaint(@RequestBody PaintForm paintForm) {
+    return paintService.create(paintForm);
   }
 
   @DeleteMapping("/{id}")
