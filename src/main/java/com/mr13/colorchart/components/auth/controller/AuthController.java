@@ -1,6 +1,7 @@
 package com.mr13.colorchart.components.auth.controller;
 
 import com.mr13.colorchart.components.auth.domain.ColorChartUserDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,10 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/")
-public class MainController {
+public class AuthController {
+
+  @Value("${spring.profiles.active}")
+  private String profile;
 
   @GetMapping
   public String main(Model model, @AuthenticationPrincipal ColorChartUserDetails user) {
@@ -20,6 +24,8 @@ public class MainController {
     data.put("profile", user);
 
     model.addAttribute("frontendData", data);
+    model.addAttribute("isDevMode", "dev".equals(profile));
+
     return "index";
   }
 }

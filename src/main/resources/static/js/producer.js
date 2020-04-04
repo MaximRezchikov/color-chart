@@ -1,4 +1,7 @@
 
+
+/*
+
 function getIndex(list, id) {
   for (let i = 0; i < list.length; i++) {
     if (list[i].id === id) {
@@ -120,4 +123,4 @@ let appProd = new Vue({
   data: {
     producers: []
   }
-});
+});*/
