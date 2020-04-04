@@ -29,9 +29,9 @@ public class PaintServiceImpl implements PaintService {
 
     Paint paint = Paint.builder()
         .name(paintName)
-        .colorNumber(colorNumber)
+        .companyColorNumber(colorNumber)
         .color(color)
-        .serialNumber(serialNumber)
+        .paintSerialNumber(serialNumber)
         .producerId(producerId)
         .build();
 
