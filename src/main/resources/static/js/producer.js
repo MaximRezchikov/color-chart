@@ -1,4 +1,13 @@
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+import Producer from 'pages/Producer.vue';
 
+Vue.use(VueResource);
+
+new Vue({
+  el: '#appProd',
+  render: a => a(Producer)
+});
 
 /*
 
@@ -67,60 +76,9 @@ Vue.component('producer-form', {
 });
 
 Vue.component('producer-row', {
-  props: ['producer', 'editMethod', 'producers'],
-  template:
-      '<div>'
-      + '<i>({{producer.id}})</i>{{producer.producerName}}<i>{{producer.country}}</i>'
-      + '<span style="position: absolute; right: 0">'
-      + '<input type="button" value="Edit" @click="edit" />'
-      + '<input type="button" value="X" @click="del" />'
-      + '</span>'
-      + '</div>',
-  methods: {
-    edit: function () {
-      this.editMethod(this.producer);
-    },
-    del: function () {
-      producerApi.remove({id: this.producer.id}).then(result => {
-        if (result.ok) {
-          this.producers.splice(this.producers.indexOf(this.producer), 1)
-        }
-      })
-    }
-  }
+
 });
 
 Vue.component('producers-list', {
-  props: ['producers'],
-  data: function () {
-    return {
-      producer: null
-    }
-  },
-  template:
-      '<div style="position: relative; width: 300px;">'
-      + '<producer-form :producers="producers" :producerAttr="producer"/>'
-      + '<producer-row v-for="producer in producers" :key="producer.id" :producer="producer" '
-      + ':editMethod="editMethod" :producers="producers"/>'
-      + '</div>',
-  created: function () {
-    producerApi.get().then(result =>
-        result.json().then(data =>
-            data.forEach(producer => this.producers.push(producer))
-        )
-    )
-  },
-  methods: {
-    editMethod: function (producer) {
-      this.producer = producer;
-    }
-  }
-});
 
-let appProd = new Vue({
-  el: '#appProd',
-  template: '<producers-list  :producers="producers" />',
-  data: {
-    producers: []
-  }
 });*/
