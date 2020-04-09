@@ -1,5 +1,4 @@
 <template>
-  '
   <div>
     <i>({{producer.id}})</i>{{producer.producerName}}<i>{{producer.country}}</i>
     <span style="position: absolute; right: 0">
@@ -10,6 +9,7 @@
 </template>
 
 <script>
+
   export default {
     props: ['producer', 'editProducer', 'deleteProducer', 'producers'],
     methods: {

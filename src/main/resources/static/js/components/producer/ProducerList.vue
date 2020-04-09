@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative; width: 300px;">
-    <!--    <producer-form :producers="producers" :producerAttr="producer"/>-->
+    <producer-form :producers="producers" :producerAttr="producer"/>
     <producer-row v-for="producer in producers"
                   :key="producer.id"
                   :producer="producer"
@@ -12,13 +12,13 @@
 
 <script>
   import ProducerRow from 'components/producer/ProducerRow.vue'
-
-
+  import ProducerForm from 'components/producer/ProducerForm.vue'
 
   export default {
     props: ['producers'],
     components: {
-      ProducerRow
+      ProducerRow,
+      ProducerForm
     },
     data() {
       return {

@@ -7,17 +7,21 @@
       <div>{{profile.name}}&nbsp;
         <a href="/logout">LogOut</a>
       </div>
-      <div>Go to add producer
-        <a href="/producer.html">Add producer</a>
-      </div>
+      <producers-list :producers="producers"/>
     </div>
   </div>
 </template>
 
 <script>
+  import ProducersList from 'components/producer/ProducerList.vue'
+
   export default {
+    components: {
+      ProducersList
+    },
     data() {
       return {
+        producers: frontendData.producers,
         profile: frontendData.profile
       }
     }

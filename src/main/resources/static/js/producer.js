@@ -39,12 +39,6 @@ Vue.component('producer-form', {
       this.id = newVal.id;
     }
   },
-  template:
-      '<div>'
-      + '<input type="text" placeholder="enter paint producer name" v-model="producerName" />'
-      + '<input type="text" placeholder="enter producer country" v-model="country" />'
-      + '<input type="button" value="Save" @click="save"/>'
-      + '</div>',
   methods: {
     save: function () {
       let producer = {
