@@ -31,8 +31,10 @@ public class AuthController {
 
     HashMap<Object, Object> data = new HashMap<>();
 
-    data.put("profile", user);
-    data.put("producers", allProducers);
+    if (user != null) {
+      data.put("profile", user);
+      data.put("producers", allProducers);
+    }
 
     model.addAttribute("frontendData", data);
     model.addAttribute("isDevMode", "dev".equals(profile));
