@@ -5,7 +5,24 @@
                dark
     >
       <v-spacer>Color-Chart</v-spacer>
-      <span v-if="profile">{{profile.name}}</span>
+      <v-btn text
+             v-if="profile"
+             :disabled="$route.path === '/'"
+             @click="showHelloPage">
+        Home Page
+      </v-btn>
+      <v-btn text
+             v-if="profile"
+             :disabled="$route.path === '/producers'"
+             @click="showProducers">
+        Producers
+      </v-btn>
+      <v-btn text
+             v-if="profile"
+             :disabled="$route.path === '/profile'"
+             @click="showProfile">
+        {{profile.name}}
+      </v-btn>
       <v-btn class="ma-2" dark v-if="profile" href="/logout">
         Exit
       </v-btn>
@@ -22,7 +39,22 @@
     data() {
       return {
         profile: frontendData.profile,
-        producers: frontendData.producers
+      }
+    },
+    methods: {
+      showHelloPage() {
+        this.$router.push('/')
+      },
+      showProducers() {
+        this.$router.push('/producers')
+      },
+      showProfile() {
+        this.$router.push('/profile')
+      }
+    },
+    beforeMount() {
+      if (!this.profile) {
+        this.$router.replace('/auth')
       }
     }
   }

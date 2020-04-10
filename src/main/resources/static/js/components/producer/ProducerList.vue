@@ -17,21 +17,21 @@
   import ProducerForm from 'components/producer/ProducerForm.vue'
 
   export default {
-    props: ['producers'],
+    props: ['producer'],
     components: {
       ProducerRow,
-      ProducerForm
+      ProducerForm,
     },
     data() {
       return {
-        producer: null
+        producers: frontendData.producers
       }
     },
-    // computed: {
-    //   sortedProducers() {
-    //     return this.producers.sort(sortByName)
-    //   }
-    // },
+    computed: {
+      sortedProducers() {
+        return this.producers.sort(sortByName)
+      }
+    },
     methods: {
       editProducer(producer) {
         this.producer = producer
@@ -45,9 +45,9 @@
       }
     }
   }
-  // let sortByName = function (a, b) {
-  //   return (a.producerName.toLowerCase() > b.producerName.toLowerCase()) ? 1 : -1
-  // }
+  let sortByName = function (a, b) {
+    return (a.producerName.toLowerCase() > b.producerName.toLowerCase()) ? 1 : -1
+  }
 
 </script>
 
