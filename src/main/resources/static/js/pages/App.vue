@@ -19,6 +19,12 @@
       </v-btn>
       <v-btn text
              v-if="profile"
+             :disabled="$route.path === '/paints'"
+             @click="showPaints">
+        Paints
+      </v-btn>
+      <v-btn text
+             v-if="profile"
              :disabled="$route.path === '/profile'"
              @click="showProfile">
         {{profile.name}}
@@ -47,6 +53,9 @@
       },
       showProducers() {
         this.$router.push('/producers')
+      },
+      showPaints() {
+        this.$router.push('/paints')
       },
       showProfile() {
         this.$router.push('/profile')
