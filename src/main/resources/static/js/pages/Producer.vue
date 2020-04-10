@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import ProducersList from 'components/producer/ProducerList.vue'
+  import ProducersList from 'pages/ProducerList.vue'
 
   export default {
     components: {
