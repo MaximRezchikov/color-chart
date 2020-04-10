@@ -1,13 +1,13 @@
 <template>
-  <div style="position: relative; width: 300px;">
+  <v-layout align-space-around justify-start column>
     <producer-form :producers="producers" :producerAttr="producer"/>
-    <producer-row v-for="producer in producers"
+    <producer-row v-for="producer in sortedProducers"
                   :key="producer.id"
                   :producer="producer"
                   :editProducer="editProducer"
                   :deleteProducer="deleteProducer"
                   :producers="producers"/>
-  </div>
+  </v-layout>
 </template>
 
 <script>
@@ -25,6 +25,11 @@
         producer: null
       }
     },
+    computed: {
+      sortedProducers() {
+        return this.producers.sort(sortByName)
+      }
+    },
     methods: {
       editProducer(producer) {
         this.producer = producer
@@ -38,6 +43,10 @@
       }
     }
   }
+  let sortByName = function (a, b) {
+    return (a.producerName.toLowerCase() > b.producerName.toLowerCase()) ? 1 : -1
+  }
+
 </script>
 
 <style>
