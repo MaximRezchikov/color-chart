@@ -3,7 +3,6 @@ package com.mr13.colorchart.components.paint.controller;
 import com.mr13.colorchart.components.paint.domain.Paint;
 import com.mr13.colorchart.components.paint.dto.PaintForm;
 import com.mr13.colorchart.components.paint.service.PaintService;
-import com.mr13.colorchart.components.producer.dto.ProducerForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,14 +25,25 @@ public class PaintController {
   private final PaintService paintService;
 
   @GetMapping
-  public List<Paint> getPaint() {
-    return paintService.get();
+  public List<Paint> getAllPaints() {
+    return paintService.getAllPaints();
+  }
+
+  @GetMapping("/{id}")
+  public Paint getOne(@PathVariable("id") Long paintId) {
+    return paintService.getOne(paintId);
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Paint createPaint(@RequestBody PaintForm paintForm) {
-    return paintService.create(paintForm);
+  public Paint savePaint(@RequestBody PaintForm paintForm) {
+    return paintService.save(paintForm);
+  }
+
+  @PutMapping("/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public Paint updatePaint(@PathVariable("id") Long paintId, @RequestBody PaintForm paintForm) {
+    return paintService.update(paintId, paintForm);
   }
 
   @DeleteMapping("/{id}")

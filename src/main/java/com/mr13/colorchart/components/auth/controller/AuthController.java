@@ -1,6 +1,8 @@
 package com.mr13.colorchart.components.auth.controller;
 
 import com.mr13.colorchart.components.auth.domain.ColorChartUserDetails;
+import com.mr13.colorchart.components.paint.domain.Paint;
+import com.mr13.colorchart.components.paint.service.PaintService;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import com.mr13.colorchart.components.producer.service.ProducerService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import java.util.List;
 public class AuthController {
 
   private final ProducerService producerService;
+  private final PaintService paintService;
 
   @Value("${spring.profiles.active}")
   private String profile;
@@ -28,12 +31,14 @@ public class AuthController {
   public String main(Model model, @AuthenticationPrincipal ColorChartUserDetails user) {
 
     List<Producer> allProducers = producerService.getAllProducer();
+    List<Paint> allPaints = paintService.getAllPaints();
 
     HashMap<Object, Object> data = new HashMap<>();
 
     if (user != null) {
       data.put("profile", user);
       data.put("producers", allProducers);
+      data.put("paints", allPaints);
     }
 
     model.addAttribute("frontendData", data);

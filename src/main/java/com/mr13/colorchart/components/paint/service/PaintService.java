@@ -7,9 +7,13 @@ import java.util.List;
 
 public interface PaintService {
 
-  Paint create(PaintForm paintForm);
+  Paint save(PaintForm paintForm);
 
-  List<Paint> get();
+  List<Paint> getAllPaints();
+
+  Paint getOne(Long paintId);
+
+  Paint update(Long paintId, PaintForm paintForm);
 
   void delete(Long paintId);
 }
