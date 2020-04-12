@@ -1,7 +1,7 @@
 package com.mr13.colorchart.components.paint.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mr13.colorchart.components.pigment.domain.Pigment;
+import com.mr13.colorchart.components.paint.features.pigment.domain.Pigment;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,11 +32,11 @@ public class Paint {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = "company_color_number")
-  private String companyColorNumber;
-
   @NotNull
   private String name;
+
+  @Column(name = "company_color_number")
+  private String companyColorNumber;
 
   private Long color;
 
@@ -46,11 +46,11 @@ public class Paint {
   @Column(name = "serial_number")
   private Long paintSerialNumber;
 
-  private String opacityGlazing;
+  private String opacity;
 
-  private Integer lightfastness;
+  private String lightfastness;
 
-  private Integer staining;
+  private String staining;
 
   private String granulation;
 

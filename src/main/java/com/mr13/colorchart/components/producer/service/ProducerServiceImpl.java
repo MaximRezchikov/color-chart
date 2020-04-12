@@ -4,7 +4,6 @@ import com.mr13.colorchart.components.producer.domain.Producer;
 import com.mr13.colorchart.components.producer.dto.ProducerForm;
 import com.mr13.colorchart.components.producer.repo.ProducerRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package com.mr13.colorchart.components.pigment.domain;
+package com.mr13.colorchart.components.paint.features.pigment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mr13.colorchart.components.paint.domain.Paint;

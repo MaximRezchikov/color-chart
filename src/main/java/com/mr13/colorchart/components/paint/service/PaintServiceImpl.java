@@ -23,7 +23,11 @@ public class PaintServiceImpl implements PaintService {
     String colorNumber = paintForm.getColorNumber();
     Long color = paintForm.getColor();
     Long serialNumber = paintForm.getSerialNumber();
-    Long producerId = paintForm.getPaintId();
+    String lightfastness = paintForm.getLightfastness();
+    String opacity = paintForm.getOpacity();
+    String staining = paintForm.getStaining();
+    String granulation = paintForm.getGranulation();
+    Long producerId = paintForm.getProducerId();
 
     Paint paint = Paint.builder()
         .name(paintName)
@@ -31,6 +35,10 @@ public class PaintServiceImpl implements PaintService {
         .color(color)
         .paintSerialNumber(serialNumber)
         .producerId(producerId)
+        .lightfastness(lightfastness)
+        .opacity(opacity)
+        .staining(staining)
+        .granulation(granulation)
         .build();
 
     return paintRepository.save(paint);
@@ -56,6 +64,11 @@ public class PaintServiceImpl implements PaintService {
     String colorNumber = paintForm.getColorNumber();
     Long color = paintForm.getColor();
     Long serialNumber = paintForm.getSerialNumber();
+    String lightfastness = paintForm.getLightfastness();
+    String opacity = paintForm.getOpacity();
+    String staining = paintForm.getStaining();
+    String granulation = paintForm.getGranulation();
+    Long producerId = paintForm.getProducerId();
 
     Paint paintToChange = getOne(paintId);
 
@@ -63,6 +76,11 @@ public class PaintServiceImpl implements PaintService {
     paintToChange.setCompanyColorNumber(colorNumber);
     paintToChange.setColor(color);
     paintToChange.setPaintSerialNumber(serialNumber);
+    paintToChange.setLightfastness(lightfastness);
+    paintToChange.setOpacity(opacity);
+    paintToChange.setStaining(staining);
+    paintToChange.setGranulation(granulation);
+    paintToChange.setProducerId(producerId);
 
     return paintRepository.save(paintToChange);
   }

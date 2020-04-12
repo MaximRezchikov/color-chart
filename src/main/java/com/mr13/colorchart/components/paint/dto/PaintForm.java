@@ -15,5 +15,13 @@ public class PaintForm {
 
   private Long serialNumber;
 
-  private Long paintId;
+  private Long producerId;
+
+  private String lightfastness;
+
+  private String opacity;
+
+  private String staining;
+
+  private String granulation;
 }
