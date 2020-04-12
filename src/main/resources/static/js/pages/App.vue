@@ -25,6 +25,12 @@
       </v-btn>
       <v-btn text
              v-if="profile"
+             :disabled="$route.path === '/table'"
+             @click="showTable">
+        Common Table
+      </v-btn>
+      <v-btn text
+             v-if="profile"
              :disabled="$route.path === '/profile'"
              @click="showProfile">
         {{profile.name}}
@@ -59,6 +65,9 @@
       },
       showProfile() {
         this.$router.push('/profile')
+      },
+      showTable() {
+        this.$router.push('/table')
       }
     },
     beforeMount() {
