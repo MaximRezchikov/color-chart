@@ -100,6 +100,7 @@
         opacity: '',
         staining: '',
         granulation: '',
+        producerId: '',
         id: ''
       }
     },

@@ -1,6 +1,7 @@
 package com.mr13.colorchart.components.paint.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mr13.colorchart.components.paint.features.pigment.domain.Pigment;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Paint {
 
   @Id
@@ -58,7 +60,6 @@ public class Paint {
   @OneToMany(mappedBy = "paint", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<Pigment> pigments;
 
-  @JsonIgnore
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "producer_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Producer producer;
