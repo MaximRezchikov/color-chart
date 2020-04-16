@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.LongStream;
 
 @Service
 @RequiredArgsConstructor
@@ -107,7 +106,5 @@ public class PaintServiceImpl implements PaintService {
         .findFirst()
         .map(Producer::getId)
         .orElseThrow(NotFoundException::new);
-
-
   }
 }

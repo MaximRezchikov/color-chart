@@ -34,38 +34,42 @@
                 outlined></v-text-field>
           </v-col>
           <v-col cols="10" sm="5">
-            <v-text-field
-                v-model="lightfastness"
+            <v-autocomplete
+                :items="lightfastnessList"
+                :search-input.sync="lightfastness"
+                color="green"
                 label="Lightfastness"
-                placeholder="L0, L1, L2, L3, L4, L5"
-                outlined></v-text-field>
+            ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
-            <v-text-field
-                v-model="opacity"
+            <v-autocomplete
+                :items="opacityList"
+                :search-input.sync="opacity"
+                color="green"
                 label="Opacity"
-                placeholder="O1, O2, O3, 04"
-                outlined></v-text-field>
+            ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
-            <v-text-field
-                v-model="staining"
+            <v-autocomplete
+                :items="stainingList"
+                :search-input.sync="staining"
+                color="green"
                 label="Staining"
-                placeholder="S1, S2, S3"
-                outlined></v-text-field>
+            ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
-            <v-text-field
-                v-model="granulation"
+            <v-autocomplete
+                :items="granulationList"
+                :search-input.sync="granulation"
+                color="green"
                 label="Granulation"
-                placeholder="Granulation"
-                outlined></v-text-field>
+            ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
             <v-autocomplete
                 :items="producerNameList"
                 :search-input.sync="producerName"
-                color="white"
+                color="green"
                 label="Producer Name"
             ></v-autocomplete>
           </v-col>
@@ -98,6 +102,10 @@
         color: '',
         colorNumber: '',
         serialNumber: '',
+        lightfastnessList: ['nr', 'L0', 'L1', 'L2', 'L3', 'L4', 'L5'],
+        opacityList: ['nr', 'O1', 'O2', 'O3', '04'],
+        stainingList: ['nr', 'S1', 'S2', 'S3'],
+        granulationList: ['nr', 'G'],
         lightfastness: '',
         opacity: '',
         staining: '',
