@@ -38,6 +38,7 @@ public class ProducerServiceImpl implements ProducerService {
   }
 
   @Override
+  @Transactional
   public List<Producer> getAllProducer() {
     return producerRepository.findAll();
   }

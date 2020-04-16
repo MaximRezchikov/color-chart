@@ -15,7 +15,7 @@ public class PaintForm {
 
   private Long serialNumber;
 
-  private Long producerId;
+  private String producerName;
 
   private String lightfastness;
 

@@ -62,12 +62,12 @@
                 outlined></v-text-field>
           </v-col>
           <v-col cols="10" sm="5">
-            <v-text-field
-                v-model="producerId"
-                type="number"
-                label="Producer Id"
-                placeholder="Producer Id"
-                outlined></v-text-field>
+            <v-autocomplete
+                :items="producerNameList"
+                :search-input.sync="producerName"
+                color="white"
+                label="Producer Name"
+            ></v-autocomplete>
           </v-col>
         </v-row>
         <v-btn class="ma-2" color="success" @click="save">Save</v-btn>
@@ -77,6 +77,8 @@
 </template>
 
 <script>
+
+  import axios from "axios";
 
   function getIndex(list, id) {
     for (let i = 0; i < list.length; i++) {
@@ -100,10 +102,21 @@
         opacity: '',
         staining: '',
         granulation: '',
-        producerId: '',
-        id: ''
+        producerNameList: [],
+        producerName: '',
+        id: '',
       }
     },
+
+    mounted() {
+      axios.get('http://localhost:8080/producer/names')
+      .then(result => {
+        this.producerNameList = result.data
+      }, error => {
+        console.error(error);
+      });
+    },
+
     watch: {
       paintAttr(newVal, oldVal) {
         this.name = newVal.name;
@@ -114,7 +127,7 @@
         this.opacity = newVal.opacity;
         this.staining = newVal.staining;
         this.granulation = newVal.granulation;
-        this.producerId = newVal.producerId;
+        this.producerName = newVal.producerName;
         this.id = newVal.id;
       }
     },
@@ -129,7 +142,7 @@
           opacity: this.opacity,
           staining: this.staining,
           granulation: this.granulation,
-          producerId: this.producerId
+          producerName: this.producerName
         };
 
         if (this.id) {
@@ -142,10 +155,10 @@
                 this.colorNumber = '';
                 this.serialNumber = '';
                 this.lightfastness = '';
-                this.opacity ='';
+                this.opacity = '';
                 this.staining = '';
                 this.granulation = '';
-                this.producerId = '';
+                this.producerName = '';
                 this.id = '';
               })
           )
@@ -158,10 +171,10 @@
                 this.colorNumber = '';
                 this.serialNumber = '';
                 this.lightfastness = '';
-                this.opacity ='';
+                this.opacity = '';
                 this.staining = '';
                 this.granulation = '';
-                this.producerId = '';
+                this.producerName = '';
               })
           )
         }

@@ -1,5 +1,6 @@
 package com.mr13.colorchart.components.producer.controller;
 
+import com.mr13.colorchart.components.producer.converter.ProducerToProducerNameConverter;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import com.mr13.colorchart.components.producer.dto.ProducerForm;
 import com.mr13.colorchart.components.producer.service.ProducerService;
@@ -23,10 +24,19 @@ import java.util.List;
 public class ProducerController {
 
   private final ProducerService producerService;
+  private final ProducerToProducerNameConverter producerToProducerNameConverter;
 
   @GetMapping
   public List<Producer> getAllProducers() {
     return producerService.getAllProducer();
+  }
+
+  @GetMapping("/names")
+  public List<String> getProducerNames() {
+
+    List<Producer> allProducers = producerService.getAllProducer();
+
+    return producerToProducerNameConverter.convert(allProducers);
   }
 
   @GetMapping("/{id}")

@@ -1,19 +1,24 @@
 package com.mr13.colorchart.components.paint.service;
 
+import com.mr13.colorchart.components.error.NotFoundException;
 import com.mr13.colorchart.components.paint.domain.Paint;
 import com.mr13.colorchart.components.paint.dto.PaintForm;
 import com.mr13.colorchart.components.paint.repo.PaintRepository;
+import com.mr13.colorchart.components.producer.domain.Producer;
+import com.mr13.colorchart.components.producer.service.ProducerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.LongStream;
 
 @Service
 @RequiredArgsConstructor
 public class PaintServiceImpl implements PaintService {
 
   private final PaintRepository paintRepository;
+  private final ProducerService producerService;
 
   @Override
   @Transactional
@@ -27,7 +32,8 @@ public class PaintServiceImpl implements PaintService {
     String opacity = paintForm.getOpacity();
     String staining = paintForm.getStaining();
     String granulation = paintForm.getGranulation();
-    Long producerId = paintForm.getProducerId();
+    String producerName = paintForm.getProducerName();
+    Long producerId = getProducerIdByName(producerName);
 
     Paint paint = Paint.builder()
         .name(paintName)
@@ -68,7 +74,8 @@ public class PaintServiceImpl implements PaintService {
     String opacity = paintForm.getOpacity();
     String staining = paintForm.getStaining();
     String granulation = paintForm.getGranulation();
-    Long producerId = paintForm.getProducerId();
+    String producerName = paintForm.getProducerName();
+    Long producerId = getProducerIdByName(producerName);
 
     Paint paintToChange = getOne(paintId);
 
@@ -89,5 +96,18 @@ public class PaintServiceImpl implements PaintService {
   @Transactional
   public void delete(Long paintId) {
     paintRepository.deleteById(paintId);
+  }
+
+  Long getProducerIdByName(String producerName) {
+
+    List<Producer> allProducers = producerService.getAllProducer();
+
+    return allProducers.stream()
+        .filter(producer -> producer.getProducerName().equals(producerName))
+        .findFirst()
+        .map(Producer::getId)
+        .orElseThrow(NotFoundException::new);
+
+
   }
 }
