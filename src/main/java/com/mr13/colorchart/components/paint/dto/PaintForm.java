@@ -24,4 +24,6 @@ public class PaintForm {
   private String staining;
 
   private String granulation;
+
+  private Long fileId;
 }

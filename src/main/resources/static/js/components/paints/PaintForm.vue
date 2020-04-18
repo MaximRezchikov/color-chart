@@ -5,6 +5,14 @@
         <v-row>
           <v-col cols="10" sm="5">
             <v-text-field
+                v-model="fileId"
+                type="number"
+                label="File ID"
+                placeholder="FileI D"
+                outlined></v-text-field>
+          </v-col>
+          <v-col cols="10" sm="5">
+            <v-text-field
                 v-model="name"
                 label="Paint"
                 placeholder="Paint"
@@ -112,6 +120,7 @@
         granulation: '',
         producerNameList: [],
         producerName: '',
+        fileId:'',
         id: '',
       }
     },
@@ -136,6 +145,7 @@
         this.staining = newVal.staining;
         this.granulation = newVal.granulation;
         this.producerName = newVal.producerName;
+        this.fileId = newVal.fileId;
         this.id = newVal.id;
       }
     },
@@ -150,7 +160,8 @@
           opacity: this.opacity,
           staining: this.staining,
           granulation: this.granulation,
-          producerName: this.producerName
+          producerName: this.producerName,
+          fileId: this.fileId
         };
 
         if (this.id) {
@@ -168,6 +179,7 @@
                 this.granulation = '';
                 this.producerName = '';
                 this.id = '';
+                this.fileId = '';
               })
           )
         } else {
@@ -183,6 +195,7 @@
                 this.staining = '';
                 this.granulation = '';
                 this.producerName = '';
+                this.fileId = '';
               })
           )
         }

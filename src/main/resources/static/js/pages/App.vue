@@ -19,6 +19,12 @@
       </v-btn>
       <v-btn text
              v-if="profile"
+             :disabled="$route.path === '/uploading'"
+             @click="showFiles">
+        Upload
+      </v-btn>
+      <v-btn text
+             v-if="profile"
              :disabled="$route.path === '/paints'"
              @click="showPaints">
         Paints
@@ -68,6 +74,9 @@
       },
       showTable() {
         this.$router.push('/table')
+      },
+      showFiles() {
+        this.$router.push('/uploading')
       }
     },
     beforeMount() {

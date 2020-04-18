@@ -4,6 +4,7 @@ import ProducersList from 'components/producer/ProducerList.vue'
 import PaintList from 'components/paints/PaintList.vue'
 import Hello from 'pages/Hello.vue'
 import Auth from 'pages/Auth.vue'
+import Picture from 'pages/upload/Picture.vue'
 import CommonTable from 'pages/tables/CommonTable.vue'
 import Profile from 'pages/Profile.vue'
 
@@ -13,6 +14,7 @@ const routes = [
   {path: '/', component: Hello},
   {path: '/producers', component: ProducersList},
   {path: '/paints', component: PaintList},
+  {path: '/uploading', component: Picture},
   {path: '/table', component: CommonTable},
   {path: '/auth', component: Auth},
   {path: '/profile', component: Profile},

@@ -33,6 +33,7 @@ public class PaintServiceImpl implements PaintService {
     String granulation = paintForm.getGranulation();
     String producerName = paintForm.getProducerName();
     Long producerId = getProducerIdByName(producerName);
+    Long fileId = paintForm.getFileId();
 
     Paint paint = Paint.builder()
         .name(paintName)
@@ -44,6 +45,7 @@ public class PaintServiceImpl implements PaintService {
         .opacity(opacity)
         .staining(staining)
         .granulation(granulation)
+        .fileId(fileId)
         .build();
 
     return paintRepository.save(paint);
