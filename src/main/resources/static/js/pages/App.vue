@@ -4,37 +4,61 @@
                color="indigo"
                dark
     >
-      <v-spacer>Color-Chart</v-spacer>
-      <v-btn text
-             v-if="profile"
-             :disabled="$route.path === '/'"
-             @click="showHelloPage">
-        Home Page
-      </v-btn>
-      <v-btn text
-             v-if="profile"
-             :disabled="$route.path === '/producers'"
-             @click="showProducers">
-        Producers
-      </v-btn>
-      <v-btn text
-             v-if="profile"
-             :disabled="$route.path === '/uploading'"
-             @click="showFiles">
-        Upload
-      </v-btn>
-      <v-btn text
-             v-if="profile"
-             :disabled="$route.path === '/paints'"
-             @click="showPaints">
-        Paints
-      </v-btn>
-      <v-btn text
-             v-if="profile"
-             :disabled="$route.path === '/table'"
-             @click="showTable">
-        Common Table
-      </v-btn>
+      <v-toolbar-title>Color-Chart</v-toolbar-title>
+      <v-menu
+          right
+          bottom
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item-title>
+            <v-btn text
+                   v-if="profile"
+                   :disabled="$route.path === '/'"
+                   @click="showHelloPage">
+              Home Page
+            </v-btn>
+          </v-list-item-title>
+          <v-list-item-title>
+            <v-btn text
+                   v-if="profile"
+                   :disabled="$route.path === '/producers'"
+                   @click="showProducers">
+              Producers
+            </v-btn>
+          </v-list-item-title>
+          <v-list-item-title>
+            <v-btn text
+                   v-if="profile"
+                   :disabled="$route.path === '/uploading'"
+                   @click="showFiles">
+              Upload
+            </v-btn>
+          </v-list-item-title>
+          <v-list-item-title>
+            <v-btn text
+                   v-if="profile"
+                   :disabled="$route.path === '/paints'"
+                   @click="showPaints">
+              Paints
+            </v-btn>
+          </v-list-item-title>
+          <v-list-item-title>
+            <v-btn text
+                   v-if="profile"
+                   :disabled="$route.path === '/table'"
+                   @click="showTable">
+              Common Table
+            </v-btn>
+          </v-list-item-title>
+        </v-list>
+      </v-menu>
+      <v-spacer></v-spacer>
       <v-btn text
              v-if="profile"
              :disabled="$route.path === '/profile'"
