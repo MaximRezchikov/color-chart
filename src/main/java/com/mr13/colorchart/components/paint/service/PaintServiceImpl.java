@@ -24,9 +24,9 @@ public class PaintServiceImpl implements PaintService {
   public Paint save(PaintForm paintForm) {
 
     String paintName = paintForm.getName();
-    String colorNumber = paintForm.getColorNumber();
+    String colorNumber = paintForm.getCompanyColorNumber();
     Long color = paintForm.getColor();
-    Long serialNumber = paintForm.getSerialNumber();
+    Long serialNumber = paintForm.getPaintSerialNumber();
     String lightfastness = paintForm.getLightfastness();
     String opacity = paintForm.getOpacity();
     String staining = paintForm.getStaining();
@@ -68,9 +68,9 @@ public class PaintServiceImpl implements PaintService {
   public Paint update(Long paintId, PaintForm paintForm) {
 
     String paintName = paintForm.getName();
-    String colorNumber = paintForm.getColorNumber();
+    String colorNumber = paintForm.getCompanyColorNumber();
     Long color = paintForm.getColor();
-    Long serialNumber = paintForm.getSerialNumber();
+    Long serialNumber = paintForm.getPaintSerialNumber();
     String lightfastness = paintForm.getLightfastness();
     String opacity = paintForm.getOpacity();
     String staining = paintForm.getStaining();

@@ -50,6 +50,9 @@ public class Paint {
   @Column(name = "file_id")
   private Long fileId;
 
+  @Column(name = "pigment_id")
+  private Long pigmentId;
+
   @Column(name = "serial_number")
   private Long paintSerialNumber;
 
@@ -61,15 +64,14 @@ public class Paint {
 
   private String granulation;
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "paint", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "paint", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Pigment> pigments;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "producer_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Producer producer;
 
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "file_id", referencedColumnName = "id", insertable = false, updatable = false)
   private File file;
 }

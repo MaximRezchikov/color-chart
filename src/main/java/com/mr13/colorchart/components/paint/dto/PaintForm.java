@@ -3,27 +3,38 @@ package com.mr13.colorchart.components.paint.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Data
 @NoArgsConstructor
 public class PaintForm {
 
-  private String colorNumber;
-
+  @NotNull
   private String name;
+
+  private String companyColorNumber;
 
   private Long color;
 
-  private Long serialNumber;
-
+  @NotNull
   private String producerName;
 
-  private String lightfastness;
-
-  private String opacity;
-
-  private String staining;
-
-  private String granulation;
+  private Long paintSerialNumber;
 
   private Long fileId;
+
+  private Long pigmentId;
+
+  @NotBlank
+  private String lightfastness;
+
+  @NotBlank
+  private String opacity;
+
+  @NotBlank
+  private String staining;
+
+  @NotBlank
+  private String granulation;
 }
