@@ -3,6 +3,8 @@ package com.mr13.colorchart.components.paint.features.pigment.service;
 import com.mr13.colorchart.components.paint.features.pigment.domain.Pigment;
 import com.mr13.colorchart.components.paint.features.pigment.dto.PigmentForm;
 
+import java.util.List;
+
 public interface PigmentService {
 
   Pigment getOne(Long pigmentId);
@@ -12,4 +14,6 @@ public interface PigmentService {
   Pigment update(Long pigmentId, PigmentForm pigmentForm);
 
   void delete(Long pigmentId);
+
+  List<Pigment> getAll();
 }

@@ -35,6 +35,14 @@
           <v-list-item-title>
             <v-btn text
                    v-if="profile"
+                   :disabled="$route.path === '/pigments'"
+                   @click="showPigments">
+              Pigments
+            </v-btn>
+          </v-list-item-title>
+          <v-list-item-title>
+            <v-btn text
+                   v-if="profile"
                    :disabled="$route.path === '/uploading'"
                    @click="showFiles">
               Upload
@@ -101,6 +109,9 @@
       },
       showFiles() {
         this.$router.push('/uploading')
+      },
+      showPigments() {
+        this.$router.push('/pigments')
       }
     },
     beforeMount() {

@@ -3,6 +3,8 @@ package com.mr13.colorchart.components.paint.service;
 import com.mr13.colorchart.components.error.NotFoundException;
 import com.mr13.colorchart.components.paint.domain.Paint;
 import com.mr13.colorchart.components.paint.dto.PaintForm;
+import com.mr13.colorchart.components.paint.features.pigment.domain.Pigment;
+import com.mr13.colorchart.components.paint.features.pigment.service.PigmentService;
 import com.mr13.colorchart.components.paint.repo.PaintRepository;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import com.mr13.colorchart.components.producer.service.ProducerService;
@@ -18,6 +20,7 @@ public class PaintServiceImpl implements PaintService {
 
   private final PaintRepository paintRepository;
   private final ProducerService producerService;
+  private final PigmentService pigmentService;
 
   @Override
   @Transactional
@@ -34,6 +37,8 @@ public class PaintServiceImpl implements PaintService {
     String producerName = paintForm.getProducerName();
     Long producerId = getProducerIdByName(producerName);
     Long fileId = paintForm.getFileId();
+    String pigmentIndex = paintForm.getPigmentIndex();
+    Long pigmentIdByName = getPigmentIdByName(pigmentIndex);
 
     Paint paint = Paint.builder()
         .name(paintName)
@@ -46,6 +51,7 @@ public class PaintServiceImpl implements PaintService {
         .staining(staining)
         .granulation(granulation)
         .fileId(fileId)
+        .pigmentId(pigmentIdByName)
         .build();
 
     return paintRepository.save(paint);
@@ -77,6 +83,8 @@ public class PaintServiceImpl implements PaintService {
     String granulation = paintForm.getGranulation();
     String producerName = paintForm.getProducerName();
     Long producerId = getProducerIdByName(producerName);
+    String pigmentIndex = paintForm.getPigmentIndex();
+    Long pigmentIdByName = getPigmentIdByName(pigmentIndex);
 
     Paint paintToChange = getOne(paintId);
 
@@ -89,6 +97,7 @@ public class PaintServiceImpl implements PaintService {
     paintToChange.setStaining(staining);
     paintToChange.setGranulation(granulation);
     paintToChange.setProducerId(producerId);
+    paintToChange.setPigmentId(pigmentIdByName);
 
     return paintRepository.save(paintToChange);
   }
@@ -107,6 +116,17 @@ public class PaintServiceImpl implements PaintService {
         .filter(producer -> producer.getProducerName().equals(producerName))
         .findFirst()
         .map(Producer::getId)
+        .orElseThrow(NotFoundException::new);
+  }
+
+  Long getPigmentIdByName(String pigmentName) {
+
+    List<Pigment> allPigments = pigmentService.getAll();
+
+    return allPigments.stream()
+        .filter(producer -> producer.getPigmentIndex().equals(pigmentName))
+        .findFirst()
+        .map(Pigment::getId)
         .orElseThrow(NotFoundException::new);
   }
 }

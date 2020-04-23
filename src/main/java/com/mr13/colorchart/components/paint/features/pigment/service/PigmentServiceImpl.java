@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PigmentServiceImpl implements PigmentService {
@@ -17,6 +19,11 @@ public class PigmentServiceImpl implements PigmentService {
   @Transactional
   public Pigment getOne(Long pigmentId) {
     return pigmentRepository.getOne(pigmentId);
+  }
+
+  @Override
+  public List<Pigment> getAll() {
+    return pigmentRepository.findAll();
   }
 
   @Override

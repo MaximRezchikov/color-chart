@@ -71,7 +71,6 @@ public class Paint {
   @JoinColumn(name = "producer_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Producer producer;
 
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  @JoinColumn(name = "file_id", referencedColumnName = "id", insertable = false, updatable = false)
+  @OneToOne(mappedBy = "paint", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private File file;
 }

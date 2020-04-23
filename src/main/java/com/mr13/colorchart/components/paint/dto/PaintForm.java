@@ -24,7 +24,7 @@ public class PaintForm {
 
   private Long fileId;
 
-  private Long pigmentId;
+  private String pigmentIndex;
 
   @NotBlank
   private String lightfastness;
