@@ -1,4 +1,4 @@
-package com.mr13.colorchart.components.paint.features.pigment.dto;
+package com.mr13.colorchart.components.pigment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

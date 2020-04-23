@@ -3,12 +3,14 @@ package com.mr13.colorchart.components.paint.service;
 import com.mr13.colorchart.components.error.NotFoundException;
 import com.mr13.colorchart.components.paint.domain.Paint;
 import com.mr13.colorchart.components.paint.dto.PaintForm;
-import com.mr13.colorchart.components.paint.features.pigment.domain.Pigment;
-import com.mr13.colorchart.components.paint.features.pigment.service.PigmentService;
+import com.mr13.colorchart.components.pigment.domain.Pigment;
+import com.mr13.colorchart.components.pigment.service.PigmentServiceImpl;
 import com.mr13.colorchart.components.paint.repo.PaintRepository;
 import com.mr13.colorchart.components.producer.domain.Producer;
-import com.mr13.colorchart.components.producer.service.ProducerService;
+import com.mr13.colorchart.components.producer.service.ProducerServiceImpl;
+import com.mr13.colorchart.core.service.CommonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +18,29 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PaintServiceImpl implements PaintService {
+public class PaintServiceImpl extends CommonService<Paint> implements PaintService {
 
   private final PaintRepository paintRepository;
-  private final ProducerService producerService;
-  private final PigmentService pigmentService;
+  private final ProducerServiceImpl producerService;
+  private final PigmentServiceImpl pigmentService;
+
+  @Override
+  @Transactional
+  public Paint getOne(Long entityId) {
+    return super.getOne(entityId);
+  }
+
+  @Override
+  @Transactional
+  public List<Paint> getAll() {
+    return super.getAll();
+  }
+
+  @Override
+  @Transactional
+  public Paint delete(Long entityId) {
+    return super.delete(entityId);
+  }
 
   @Override
   @Transactional
@@ -59,18 +79,6 @@ public class PaintServiceImpl implements PaintService {
 
   @Override
   @Transactional
-  public List<Paint> getAllPaints() {
-    return paintRepository.findAll();
-  }
-
-  @Override
-  @Transactional
-  public Paint getOne(Long paintId) {
-    return paintRepository.getOne(paintId);
-  }
-
-  @Override
-  @Transactional
   public Paint update(Long paintId, PaintForm paintForm) {
 
     String paintName = paintForm.getName();
@@ -102,15 +110,9 @@ public class PaintServiceImpl implements PaintService {
     return paintRepository.save(paintToChange);
   }
 
-  @Override
-  @Transactional
-  public void delete(Long paintId) {
-    paintRepository.deleteById(paintId);
-  }
-
   Long getProducerIdByName(String producerName) {
 
-    List<Producer> allProducers = producerService.getAllProducer();
+    List<Producer> allProducers = producerService.getAll();
 
     return allProducers.stream()
         .filter(producer -> producer.getProducerName().equals(producerName))
@@ -128,5 +130,10 @@ public class PaintServiceImpl implements PaintService {
         .findFirst()
         .map(Pigment::getId)
         .orElseThrow(NotFoundException::new);
+  }
+
+  @Override
+  public JpaRepository<Paint, Long> getRepository() {
+    return paintRepository;
   }
 }

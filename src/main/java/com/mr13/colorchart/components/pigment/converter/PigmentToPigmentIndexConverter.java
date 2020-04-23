@@ -1,6 +1,6 @@
-package com.mr13.colorchart.components.paint.features.pigment.converter;
+package com.mr13.colorchart.components.pigment.converter;
 
-import com.mr13.colorchart.components.paint.features.pigment.domain.Pigment;
+import com.mr13.colorchart.components.pigment.domain.Pigment;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

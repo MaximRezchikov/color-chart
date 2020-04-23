@@ -2,32 +2,21 @@ package com.mr13.colorchart.components.upload.service;
 
 import com.mr13.colorchart.components.upload.domain.File;
 import com.mr13.colorchart.components.upload.repo.FileRepository;
+import com.mr13.colorchart.core.service.CommonService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.Base64;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FilServiceImpl implements FileService {
+public class FilServiceImpl extends CommonService<File> implements FileService {
 
   private final FileRepository fileRepository;
-
-  @Override
-  public File getById(Long fileId) {
-    return fileRepository.getOne(fileId);
-  }
-
-  @Override
-  public List<File> getAllFiles() {
-    return fileRepository.findAll();
-  }
 
   @Override
   @Transactional
@@ -41,5 +30,25 @@ public class FilServiceImpl implements FileService {
         .build();
 
     fileRepository.save(fileToSave);
+  }
+
+  @Override
+  public File getOne(Long entityId) {
+    return super.getOne(entityId);
+  }
+
+  @Override
+  public List<File> getAll() {
+    return super.getAll();
+  }
+
+  @Override
+  public File delete(Long entityId) {
+    return super.delete(entityId);
+  }
+
+  @Override
+  public JpaRepository<File, Long> getRepository() {
+    return fileRepository;
   }
 }

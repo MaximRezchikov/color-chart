@@ -7,12 +7,13 @@ public class ColorChartValidation {
 
   public String checkPigmentIndex(String pigmentIndex) {
 
-    if (pigmentIndex.contains("R")||pigmentIndex.contains("K")) {
+    if (pigmentIndex.contains("R") || pigmentIndex.contains("K") && pigmentIndex.length() >= 3) {
 
       String letterToChange = pigmentIndex.substring(2, 3);
       String letterToReplace = letterToChange.toLowerCase();
       return pigmentIndex.replace(letterToChange, letterToReplace);
-    } else {
+    }
+    else {
       return pigmentIndex;
     }
   }
