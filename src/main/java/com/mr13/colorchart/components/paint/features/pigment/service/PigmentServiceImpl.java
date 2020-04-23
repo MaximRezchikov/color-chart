@@ -3,6 +3,7 @@ package com.mr13.colorchart.components.paint.features.pigment.service;
 import com.mr13.colorchart.components.paint.features.pigment.domain.Pigment;
 import com.mr13.colorchart.components.paint.features.pigment.dto.PigmentForm;
 import com.mr13.colorchart.components.paint.features.pigment.repo.PigmentRepository;
+import com.mr13.colorchart.validation.ColorChartValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 public class PigmentServiceImpl implements PigmentService {
 
   private final PigmentRepository pigmentRepository;
+  private final ColorChartValidation colorChartValidation;
 
   @Override
   @Transactional
@@ -31,9 +33,11 @@ public class PigmentServiceImpl implements PigmentService {
   public Pigment save(PigmentForm pigmentForm) {
 
     String pigmentIndex = pigmentForm.getPigmentIndex();
+    String pigmentIndexToCheck = pigmentIndex.toUpperCase();
+    String pigmentIndexToSave = colorChartValidation.checkPigmentIndex(pigmentIndexToCheck);
 
     Pigment pigmentToSave = Pigment.builder()
-        .pigmentIndex(pigmentIndex)
+        .pigmentIndex(pigmentIndexToSave)
         .build();
 
     return pigmentRepository.save(pigmentToSave);
