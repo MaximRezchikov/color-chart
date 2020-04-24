@@ -7,7 +7,10 @@ import com.mr13.colorchart.components.upload.domain.File;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,19 +23,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Data
 @Entity
+@Table
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@EqualsAndHashCode(of = { "id" })
 public class Paint {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotNull
@@ -43,13 +48,10 @@ public class Paint {
 
   private Long color;
 
-  @Column(name = "producer_id")
   private Long producerId;
 
-  @Column(name = "file_id")
   private Long fileId;
 
-  @Column(name = "pigment_id")
   private Long pigmentId;
 
   @Column(name = "serial_number")
@@ -63,13 +65,13 @@ public class Paint {
 
   private String granulation;
 
-  @OneToMany(mappedBy = "paint", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "paint", fetch = FetchType.EAGER)
   private Set<Pigment> pigments;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "producer_id", referencedColumnName = "id", insertable = false, updatable = false)
+  @JoinColumn(name = "producerId", referencedColumnName = "id", insertable = false, updatable = false)
   private Producer producer;
 
-  @OneToOne(mappedBy = "paint", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToOne(mappedBy = "paint", fetch = FetchType.EAGER)
   private File file;
 }

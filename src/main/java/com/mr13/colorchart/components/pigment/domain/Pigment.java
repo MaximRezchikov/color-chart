@@ -6,6 +6,7 @@ import com.mr13.colorchart.components.paint.domain.Paint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -15,29 +16,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
+@Table
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@EqualsAndHashCode(of = { "id" })
 public class Pigment {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotNull
   private String pigmentIndex;
 
   @JsonIgnore
-  @Column(name = "paint_id")
   private Long paintId;
 
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name = "paint_id", referencedColumnName = "id", insertable = false, updatable = false)
+  @JoinColumn(name = "paintId", insertable = false, updatable = false)
   private Paint paint;
 }
