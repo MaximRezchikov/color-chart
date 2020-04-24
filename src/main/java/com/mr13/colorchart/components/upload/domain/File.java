@@ -34,8 +34,4 @@ public class File {
   private Long id;
 
   private byte[] file;
-
-  @JsonIgnore
-  @OneToOne
-  private Paint paint;
 }

@@ -1,6 +1,5 @@
 package com.mr13.colorchart.components.paint.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mr13.colorchart.components.pigment.domain.Pigment;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import com.mr13.colorchart.components.upload.domain.File;
@@ -9,8 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -72,6 +69,7 @@ public class Paint {
   @JoinColumn(name = "producerId", referencedColumnName = "id", insertable = false, updatable = false)
   private Producer producer;
 
-  @OneToOne(mappedBy = "paint", fetch = FetchType.EAGER)
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "fileId", referencedColumnName = "id", insertable = false, updatable = false)
   private File file;
 }
