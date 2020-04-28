@@ -7,5 +7,7 @@ public interface ProducerService {
 
   Producer save(ProducerForm producerForm);
 
+  Producer getByName(String producerName);
+
   Producer update(Long producerId, ProducerForm producerForm);
 }

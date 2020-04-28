@@ -1,4 +1,4 @@
-package com.mr13.colorchart.components.upload.service;
+package com.mr13.colorchart.components.picture.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

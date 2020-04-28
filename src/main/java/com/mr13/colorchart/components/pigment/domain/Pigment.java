@@ -8,16 +8,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,7 +31,9 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(of = "name")
 @EqualsAndHashCode(of = { "id" })
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pigment {
 
   @Id
@@ -33,13 +41,10 @@ public class Pigment {
   private Long id;
 
   @NotNull
-  private String pigmentIndex;
+  @Column(unique = true)
+  private String name;
 
   @JsonIgnore
-  private Long paintId;
-
-  @JsonIgnore
-  @ManyToOne
-  @JoinColumn(name = "paintId", insertable = false, updatable = false)
-  private Paint paint;
+  @ManyToMany(mappedBy = "pigments", fetch = FetchType.LAZY)
+  private List<Paint> paints;
 }

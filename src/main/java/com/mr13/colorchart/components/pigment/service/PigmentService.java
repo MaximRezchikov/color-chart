@@ -8,4 +8,6 @@ public interface PigmentService {
   Pigment save(PigmentForm pigmentForm);
 
   Pigment update(Long pigmentId, PigmentForm pigmentForm);
+
+  Pigment getByName(String pigmentIndex);
 }

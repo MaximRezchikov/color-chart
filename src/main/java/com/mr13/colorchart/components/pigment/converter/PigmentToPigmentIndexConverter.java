@@ -13,7 +13,7 @@ public class PigmentToPigmentIndexConverter implements Converter<List<Pigment>, 
   @Override
   public List<String> convert(List<Pigment> pigments) {
     return pigments.stream()
-        .map(Pigment::getPigmentIndex)
+        .map(Pigment::getName)
         .collect(Collectors.toList());
   }
 }

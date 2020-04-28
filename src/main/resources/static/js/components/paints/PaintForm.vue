@@ -82,12 +82,13 @@
             ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
-            <v-autocomplete
+            <v-select
+                v-model="pigmentIndex"
                 :items="pigmentList"
-                :search-input.sync="pigmentIndex"
+                multiple
                 color="green"
                 label="Pigment"
-            ></v-autocomplete>
+            ></v-select>
           </v-col>
         </v-row>
         <v-btn class="ma-2" color="success" @click="save">Save</v-btn>
@@ -129,7 +130,7 @@
         producerNameList: [],
         producerName: '',
         pigmentList: [],
-        pigmentIndex: '',
+        pigmentIndex: [],
         fileId:'',
         id: '',
       }
@@ -196,7 +197,7 @@
                 this.staining = '';
                 this.granulation = '';
                 this.producerName = '';
-                this.pigmentIndex = '';
+                this.pigmentIndex = [];
                 this.id = '';
                 this.fileId = '';
               })
@@ -214,7 +215,7 @@
                 this.staining = '';
                 this.granulation = '';
                 this.producerName = '';
-                this.pigmentIndex = '';
+                this.pigmentIndex = [];
                 this.fileId = '';
               })
           )

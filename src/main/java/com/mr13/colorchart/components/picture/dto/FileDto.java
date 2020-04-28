@@ -1,4 +1,4 @@
-package com.mr13.colorchart.components.upload.dto;
+package com.mr13.colorchart.components.picture.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

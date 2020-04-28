@@ -1,7 +1,7 @@
-package com.mr13.colorchart.components.upload.controller;
+package com.mr13.colorchart.components.picture.controller;
 
-import com.mr13.colorchart.components.upload.domain.File;
-import com.mr13.colorchart.components.upload.service.FileService;
+import com.mr13.colorchart.components.picture.domain.File;
+import com.mr13.colorchart.components.picture.service.FileService;
 import com.mr13.colorchart.core.controller.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,7 +1,7 @@
-package com.mr13.colorchart.components.upload.service;
+package com.mr13.colorchart.components.picture.service;
 
-import com.mr13.colorchart.components.upload.domain.File;
-import com.mr13.colorchart.components.upload.repo.FileRepository;
+import com.mr13.colorchart.components.picture.domain.File;
+import com.mr13.colorchart.components.picture.repo.FileRepository;
 import com.mr13.colorchart.core.service.CommonService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

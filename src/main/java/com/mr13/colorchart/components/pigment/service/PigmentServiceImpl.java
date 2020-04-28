@@ -8,6 +8,7 @@ import com.mr13.colorchart.validation.ColorChartValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class PigmentServiceImpl extends CommonService<Pigment> implements Pigmen
   private final ColorChartValidation colorChartValidation;
 
   @Override
-  @Transactional
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
   public Pigment getOne(Long entityId) {
     return super.getOne(entityId);
   }
@@ -41,12 +42,12 @@ public class PigmentServiceImpl extends CommonService<Pigment> implements Pigmen
   @Transactional
   public Pigment save(PigmentForm pigmentForm) {
 
-    String pigmentIndex = pigmentForm.getPigmentIndex();
+    String pigmentIndex = pigmentForm.getName();
     String pigmentIndexToCheck = pigmentIndex.toUpperCase();
     String pigmentIndexToSave = colorChartValidation.checkPigmentIndex(pigmentIndexToCheck);
 
     Pigment pigmentToSave = Pigment.builder()
-        .pigmentIndex(pigmentIndexToSave)
+        .name(pigmentIndexToSave)
         .build();
 
     return pigmentRepository.save(pigmentToSave);
@@ -54,14 +55,20 @@ public class PigmentServiceImpl extends CommonService<Pigment> implements Pigmen
 
   @Override
   @Transactional
+  public Pigment getByName(String pigmentIndex) {
+    return pigmentRepository.getByName(pigmentIndex);
+  }
+
+  @Override
+  @Transactional
   public Pigment update(Long pigmentId, PigmentForm pigmentForm) {
 
-    String pigmentIndex = pigmentForm.getPigmentIndex();
+    String pigmentIndex = pigmentForm.getName();
     String pigmentIndexToCheck = pigmentIndex.toUpperCase();
     String pigmentIndexToSave = colorChartValidation.checkPigmentIndex(pigmentIndexToCheck);
 
     Pigment pigmentToChange = getOne(pigmentId);
-    pigmentToChange.setPigmentIndex(pigmentIndexToSave);
+    pigmentToChange.setName(pigmentIndexToSave);
 
     return pigmentRepository.save(pigmentToChange);
   }

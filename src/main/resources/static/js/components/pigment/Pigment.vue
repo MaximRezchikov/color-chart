@@ -2,7 +2,7 @@
   <v-data-table
       :headers="headers"
       :items="pigmentList"
-      sort-by="pigmentIndex"
+      sort-by="name"
       class="elevation-1"
   >
     <template v-slot:top>
@@ -20,7 +20,7 @@
           </template>
           <v-card>
             <v-card-title>
-              <span v-if="editedItem.id">Edit {{editedItem.pigmentIndex}}</span>
+              <span v-if="editedItem.id">Edit {{editedItem.name}}</span>
               <span v-else>Create</span>
             </v-card-title>
 
@@ -28,7 +28,7 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="pigmentList.pigmentIndex" label="Pigment index"></v-text-field>
+                    <v-text-field v-model="pigmentList.name" label="Pigment index"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -77,13 +77,13 @@
             sortable: false,
             value: 'name',
           },
-          {text: 'Pigment Index', value: 'pigmentIndex'},
+          {text: 'Pigment Index', value: 'name'},
           {text: 'Actions', value: 'actions', sortable: false}
         ],
         editedIndex: -1,
         pigmentList: [],
         defaultItem: {
-          pigmentIndex: ''
+          name: ''
         },
         editedItem: {}
       }
@@ -109,7 +109,7 @@
         const index = this.pigmentList.indexOf(item);
         if (confirm('Are you sure you want to delete this pigment?') && this.pigmentList.splice(index, 1)) {
           axios.delete('http://localhost:8080/pigment/' + item.id, {
-            pigmentIndex: this.pigmentList.pigmentIndex
+            name: this.pigmentList.name
           });
         }
       },
@@ -128,13 +128,13 @@
 
         if (id) {
           axios.put('http://localhost:8080/pigment/' + id, {
-            pigmentIndex: this.pigmentList.pigmentIndex
+            name: this.pigmentList.name
           });
         } else {
           axios.post('http://localhost:8080/pigment', {
-            pigmentIndex: this.pigmentList.pigmentIndex
+            name: this.pigmentList.name
           });
-          this.pigmentList.pigmentIndex = ''
+          this.pigmentList.name = ''
         }
 
         this.close()

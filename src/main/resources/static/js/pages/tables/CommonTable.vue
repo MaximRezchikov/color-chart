@@ -48,13 +48,14 @@
           {text: 'Lightfastness', value: 'lightfastness'},
           {text: 'Staining', value: 'staining'},
           {text: 'Granulation', value: 'granulation'},
+          {text: 'Pigment', value: 'pigmentsFromSet'},
           {text: 'Producer', value: 'producer.producerName'},
         ],
         paintList: []
       }
     },
     mounted() {
-      axios.get('http://localhost:8080/paint')
+      axios.get('http://localhost:8080/paint/withpigment')
       .then(result => {
         this.paintList = result.data
       }, error => {

@@ -56,6 +56,12 @@ public class ProducerServiceImpl extends CommonService<Producer> implements Prod
 
   @Override
   @Transactional
+  public Producer getByName(String producerName) {
+    return producerRepository.getByProducerName(producerName);
+  }
+
+  @Override
+  @Transactional
   public List<Producer> getAll() {
     return super.getAll();
   }

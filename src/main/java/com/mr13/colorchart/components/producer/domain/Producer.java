@@ -29,6 +29,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = { "id" })
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Producer {
 
   @Id
