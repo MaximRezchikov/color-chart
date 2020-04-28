@@ -42,12 +42,12 @@ public class PigmentServiceImpl extends CommonService<Pigment> implements Pigmen
   @Transactional
   public Pigment save(PigmentForm pigmentForm) {
 
-    String pigmentIndex = pigmentForm.getName();
+    String pigmentIndex = pigmentForm.getPigmentIndex();
     String pigmentIndexToCheck = pigmentIndex.toUpperCase();
     String pigmentIndexToSave = colorChartValidation.checkPigmentIndex(pigmentIndexToCheck);
 
     Pigment pigmentToSave = Pigment.builder()
-        .name(pigmentIndexToSave)
+        .pigmentIndex(pigmentIndexToSave)
         .build();
 
     return pigmentRepository.save(pigmentToSave);
@@ -56,19 +56,19 @@ public class PigmentServiceImpl extends CommonService<Pigment> implements Pigmen
   @Override
   @Transactional
   public Pigment getByName(String pigmentIndex) {
-    return pigmentRepository.getByName(pigmentIndex);
+    return pigmentRepository.getByPigmentIndex(pigmentIndex);
   }
 
   @Override
   @Transactional
   public Pigment update(Long pigmentId, PigmentForm pigmentForm) {
 
-    String pigmentIndex = pigmentForm.getName();
+    String pigmentIndex = pigmentForm.getPigmentIndex();
     String pigmentIndexToCheck = pigmentIndex.toUpperCase();
     String pigmentIndexToSave = colorChartValidation.checkPigmentIndex(pigmentIndexToCheck);
 
     Pigment pigmentToChange = getOne(pigmentId);
-    pigmentToChange.setName(pigmentIndexToSave);
+    pigmentToChange.setPigmentIndex(pigmentIndexToSave);
 
     return pigmentRepository.save(pigmentToChange);
   }

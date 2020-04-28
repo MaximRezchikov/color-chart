@@ -41,6 +41,12 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
   }
 
   @Override
+  @Transactional
+  public Paint getByName(String paintName) {
+    return paintRepository.getByName(paintName);
+  }
+
+  @Override
   public List<Paint> getPaintsWithStringPigments() {
 
     List<Paint> allPaints = getAll();
@@ -53,7 +59,7 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
 
       List<Pigment> pigmentList = new ArrayList<>(pigments);
       pigmentList.stream()
-          .map(Pigment::getName)
+          .map(Pigment::getPigmentIndex)
           .forEach(pigmentIndexes::add);
 
       String join = String.join(",", pigmentIndexes);
@@ -142,14 +148,16 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
 
   @Override
   @Transactional
-  public void addPigmentToPaint(Long paintId, PaintPigmentForm paintPigmentForm) {
+  public void addPigmentToPaint(String paintName, PaintPigmentForm paintPigmentForm) {
 
-    Paint paint = getOne(paintId);
-    List<String> names = paintPigmentForm.getNames();
+    Paint paint = getByName(paintName);
+    List<String> pigmentIndexes = paintPigmentForm.getPigmentIndexes();
 
-    names.stream()
-        .map(pigmentService::getByName)
-        .forEach(paint::addPigment);
+    for (int i = 0; i < pigmentIndexes.size(); i++) {
+      String pigmentIndex = pigmentIndexes.get(i);
+      Pigment byName = pigmentService.getByName(pigmentIndex);
+      paint.addPigment(byName);
+    }
 
     paintRepository.save(paint);
   }

@@ -1,8 +1,10 @@
 package com.mr13.colorchart.components.paint.controller;
 
+import com.mr13.colorchart.components.paint.converter.PaintToPaintNameConverter;
 import com.mr13.colorchart.components.paint.domain.Paint;
 import com.mr13.colorchart.components.paint.dto.PaintForm;
 import com.mr13.colorchart.components.paint.service.PaintService;
+import com.mr13.colorchart.components.paint.service.PaintServiceImpl;
 import com.mr13.colorchart.core.controller.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,10 +27,19 @@ import static com.mr13.colorchart.core.constants.URLConstant.PAINT_BASE_URL;
 public class PaintController extends CommonController<Paint> {
 
   private final PaintService paintService;
+  private final PaintServiceImpl paintServiceImpl;
+  private final PaintToPaintNameConverter paintToPaintNameConverter;
 
   @GetMapping("/withpigment")
   public List<Paint> getPaintsWithStringPigments() {
     return paintService.getPaintsWithStringPigments();
+  }
+
+  @GetMapping("/names")
+  public List<String> getAllNames() {
+    List<Paint> paints = paintServiceImpl.getAll();
+
+    return paintToPaintNameConverter.convert(paints);
   }
 
   @PostMapping

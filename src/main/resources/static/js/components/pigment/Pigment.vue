@@ -2,7 +2,7 @@
   <v-data-table
       :headers="headers"
       :items="pigmentList"
-      sort-by="name"
+      sort-by="pigmentIndex"
       class="elevation-1"
   >
     <template v-slot:top>
@@ -20,7 +20,7 @@
           </template>
           <v-card>
             <v-card-title>
-              <span v-if="editedItem.id">Edit {{editedItem.name}}</span>
+              <span v-if="editedItem.id">Edit {{editedItem.pigmentIndex}}</span>
               <span v-else>Create</span>
             </v-card-title>
 
@@ -28,7 +28,7 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="pigmentList.name" label="Pigment index"></v-text-field>
+                    <v-text-field v-model="pigmentList.pigmentIndex" label="Pigment index"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -75,15 +75,15 @@
             text: 'Pigment',
             align: 'start',
             sortable: false,
-            value: 'name',
+            value: 'pigmentIndex',
           },
-          {text: 'Pigment Index', value: 'name'},
+          {text: 'Pigment Index', value: 'pigmentIndex'},
           {text: 'Actions', value: 'actions', sortable: false}
         ],
         editedIndex: -1,
         pigmentList: [],
         defaultItem: {
-          name: ''
+          pigmentIndex: ''
         },
         editedItem: {}
       }
@@ -109,7 +109,7 @@
         const index = this.pigmentList.indexOf(item);
         if (confirm('Are you sure you want to delete this pigment?') && this.pigmentList.splice(index, 1)) {
           axios.delete('http://localhost:8080/pigment/' + item.id, {
-            name: this.pigmentList.name
+            pigmentIndex: this.pigmentList.pigmentIndex
           });
         }
       },
@@ -128,13 +128,13 @@
 
         if (id) {
           axios.put('http://localhost:8080/pigment/' + id, {
-            name: this.pigmentList.name
+            pigmentIndex: this.pigmentList.pigmentIndex
           });
         } else {
           axios.post('http://localhost:8080/pigment', {
-            name: this.pigmentList.name
+            pigmentIndex: this.pigmentList.pigmentIndex
           });
-          this.pigmentList.name = ''
+          this.pigmentList.pigmentIndex = ''
         }
 
         this.close()

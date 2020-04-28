@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PigmentRepository extends JpaRepository<Pigment, Long> {
 
-  Pigment getByName(String name);
+  Pigment getByPigmentIndex(String pigmentIndex);
 }

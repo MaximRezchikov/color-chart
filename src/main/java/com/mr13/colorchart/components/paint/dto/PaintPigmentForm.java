@@ -9,5 +9,5 @@ import java.util.List;
 @NoArgsConstructor
 public class PaintPigmentForm {
 
-  List<String> names;
+  List<String> pigmentIndexes;
 }

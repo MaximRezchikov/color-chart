@@ -42,7 +42,7 @@ public class Pigment {
 
   @NotNull
   @Column(unique = true)
-  private String name;
+  private String pigmentIndex;
 
   @JsonIgnore
   @ManyToMany(mappedBy = "pigments", fetch = FetchType.LAZY)

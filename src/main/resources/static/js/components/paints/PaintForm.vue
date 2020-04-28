@@ -81,9 +81,20 @@
                 label="Producer Name"
             ></v-autocomplete>
           </v-col>
+        </v-row>
+        <v-btn class="ma-2" color="success" @click="save">Save paint</v-btn>
+        <v-row>
+          <v-col cols="10" sm="5">
+            <v-autocomplete
+                :items="paintNameList"
+                :search-input.sync="paintName"
+                color="green"
+                label="Paint"
+            ></v-autocomplete>
+          </v-col>
           <v-col cols="10" sm="5">
             <v-select
-                v-model="pigmentIndex"
+                v-model="pigmentIndexes"
                 :items="pigmentList"
                 multiple
                 color="green"
@@ -91,7 +102,7 @@
             ></v-select>
           </v-col>
         </v-row>
-        <v-btn class="ma-2" color="success" @click="save">Save</v-btn>
+        <v-btn class="ma-2" color="success" @click="addPigments(paintName, pigmentIndexes)">Add pigment</v-btn>
       </v-container>
     </v-form>
   </div>
@@ -112,7 +123,7 @@
   }
 
   export default {
-    props: ['paints', 'paintAttr'],
+    props: ['paints', 'paintAttr', 'pigmentAttr'],
     data() {
       return {
         name: '',
@@ -129,9 +140,11 @@
         granulation: '',
         producerNameList: [],
         producerName: '',
+        paintNameList: [],
+        paintName: '',
         pigmentList: [],
-        pigmentIndex: [],
-        fileId:'',
+        pigmentIndexes: [],
+        fileId: '',
         id: '',
       }
     },
@@ -149,6 +162,12 @@
       }, error => {
         console.error(error);
       });
+      axios.get('http://localhost:8080/paint/names')
+      .then(result => {
+        this.paintNameList = result.data
+      }, error => {
+        console.error(error);
+      });
     },
 
     watch: {
@@ -162,9 +181,11 @@
         this.staining = newVal.staining;
         this.granulation = newVal.granulation;
         this.producerName = newVal.producerName;
-        this.pigmentIndex = newVal.pigmentIndex;
         this.fileId = newVal.fileId;
         this.id = newVal.id;
+      },
+      pigmentAttr(newVal, oldVal) {
+        this.pigmentIndexes = newVal.pigmentIndexes;
       }
     },
     methods: {
@@ -179,7 +200,6 @@
           staining: this.staining,
           granulation: this.granulation,
           producerName: this.producerName,
-          pigmentIndex: this.pigmentIndex,
           fileId: this.fileId
         };
 
@@ -197,7 +217,6 @@
                 this.staining = '';
                 this.granulation = '';
                 this.producerName = '';
-                this.pigmentIndex = [];
                 this.id = '';
                 this.fileId = '';
               })
@@ -215,11 +234,18 @@
                 this.staining = '';
                 this.granulation = '';
                 this.producerName = '';
-                this.pigmentIndex = [];
                 this.fileId = '';
               })
           )
         }
+      },
+
+      addPigments(paintName, pigmentIndexes) {
+        axios.post('http://localhost:8080/paint/' + paintName + '/pigment', {
+          pigmentIndexes: pigmentIndexes
+        });
+        this.paintName = '';
+        this.pigmentIndexes = '';
       }
     }
   }

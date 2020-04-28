@@ -22,9 +22,9 @@ public class PaintPigmentController {
 
   private final PaintServiceImpl paintService;
 
-  @PostMapping("/{paintId}" + PIGMENT_BASE_URL)
+  @PostMapping("/{paintName}" + PIGMENT_BASE_URL)
   @ResponseStatus(HttpStatus.CREATED)
-  public void addPigmentToPaint(@PathVariable Long paintId, @RequestBody PaintPigmentForm paintPigmentForm) {
-    paintService.addPigmentToPaint(paintId, paintPigmentForm);
+  public void addPigmentToPaint(@PathVariable String paintName, @RequestBody PaintPigmentForm paintPigmentForm) {
+    paintService.addPigmentToPaint(paintName, paintPigmentForm);
   }
 }

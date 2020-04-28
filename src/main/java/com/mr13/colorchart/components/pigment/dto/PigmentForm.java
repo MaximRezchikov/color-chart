@@ -12,5 +12,5 @@ import javax.validation.constraints.NotNull;
 public class PigmentForm {
 
   @NotNull
-  private String name;
+  private String pigmentIndex;
 }

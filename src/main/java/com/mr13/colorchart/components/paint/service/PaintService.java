@@ -13,7 +13,9 @@ public interface PaintService {
 
   Paint update(Long paintId, PaintForm paintForm);
 
+  Paint getByName(String paintName);
+
   List<Paint> getPaintsWithStringPigments();
 
-  void addPigmentToPaint(Long paintId, PaintPigmentForm paintPigmentForm);
+  void addPigmentToPaint(String paintName, PaintPigmentForm paintPigmentForm);
 }
