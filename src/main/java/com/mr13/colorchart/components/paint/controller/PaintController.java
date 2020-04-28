@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.mr13.colorchart.core.constants.URLConstant.PAINT_BASE_URL;
@@ -44,13 +45,13 @@ public class PaintController extends CommonController<Paint> {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Paint savePaint(@RequestBody PaintForm paintForm) {
+  public Paint savePaint(@Valid @RequestBody PaintForm paintForm) {
     return paintService.save(paintForm);
   }
 
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Paint updatePaint(@PathVariable("id") Long paintId, @RequestBody PaintForm paintForm) {
+  public Paint updatePaint(@PathVariable("id") Long paintId, @Valid @RequestBody PaintForm paintForm) {
     return paintService.update(paintId, paintForm);
   }
 }

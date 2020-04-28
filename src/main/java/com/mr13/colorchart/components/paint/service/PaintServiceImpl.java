@@ -153,11 +153,9 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
     Paint paint = getByName(paintName);
     List<String> pigmentIndexes = paintPigmentForm.getPigmentIndexes();
 
-    for (int i = 0; i < pigmentIndexes.size(); i++) {
-      String pigmentIndex = pigmentIndexes.get(i);
-      Pigment byName = pigmentService.getByName(pigmentIndex);
-      paint.addPigment(byName);
-    }
+    pigmentIndexes.stream()
+        .map(pigmentService::getByName)
+        .forEach(paint::addPigment);
 
     paintRepository.save(paint);
   }

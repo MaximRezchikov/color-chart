@@ -33,16 +33,19 @@ public class FilServiceImpl extends CommonService<File> implements FileService {
   }
 
   @Override
+  @Transactional
   public File getOne(Long entityId) {
     return super.getOne(entityId);
   }
 
   @Override
+  @Transactional
   public List<File> getAll() {
     return super.getAll();
   }
 
   @Override
+  @Transactional
   public File delete(Long entityId) {
     return super.delete(entityId);
   }

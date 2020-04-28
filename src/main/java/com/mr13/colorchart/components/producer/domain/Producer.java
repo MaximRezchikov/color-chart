@@ -19,7 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Data
@@ -36,10 +36,11 @@ public class Producer {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank
-  @Column(name = "producer_name")
+  @NotNull
+  @Column(name = "producer_name", unique = true)
   private String producerName;
 
+  @NotNull
   private String country;
 
   @JsonIgnore

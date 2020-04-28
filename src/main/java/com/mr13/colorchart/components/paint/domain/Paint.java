@@ -2,9 +2,9 @@ package com.mr13.colorchart.components.paint.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mr13.colorchart.components.picture.domain.File;
 import com.mr13.colorchart.components.pigment.domain.Pigment;
 import com.mr13.colorchart.components.producer.domain.Producer;
-import com.mr13.colorchart.components.picture.domain.File;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +23,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -49,6 +47,7 @@ public class Paint {
   private Long id;
 
   @NotNull
+  @Column(unique = true)
   private String name;
 
   @Column(name = "company_color_number")

@@ -1,5 +1,6 @@
 package com.mr13.colorchart.components.pigment.service;
 
+import com.mr13.colorchart.components.error.NotFoundException;
 import com.mr13.colorchart.components.pigment.domain.Pigment;
 import com.mr13.colorchart.components.pigment.dto.PigmentForm;
 import com.mr13.colorchart.components.pigment.repo.PigmentRepository;
@@ -67,10 +68,15 @@ public class PigmentServiceImpl extends CommonService<Pigment> implements Pigmen
     String pigmentIndexToCheck = pigmentIndex.toUpperCase();
     String pigmentIndexToSave = colorChartValidation.checkPigmentIndex(pigmentIndexToCheck);
 
-    Pigment pigmentToChange = getOne(pigmentId);
-    pigmentToChange.setPigmentIndex(pigmentIndexToSave);
+    if (exists(pigmentId)) {
+      Pigment pigmentToChange = getOne(pigmentId);
+      pigmentToChange.setPigmentIndex(pigmentIndexToSave);
 
-    return pigmentRepository.save(pigmentToChange);
+      return pigmentRepository.save(pigmentToChange);
+    }
+    else {
+      throw new NotFoundException();
+    }
   }
 
   @Override

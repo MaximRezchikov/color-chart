@@ -2,7 +2,6 @@ package com.mr13.colorchart.components.paint.controller;
 
 import com.mr13.colorchart.components.paint.dto.PaintPigmentForm;
 import com.mr13.colorchart.components.paint.service.PaintServiceImpl;
-import com.mr13.colorchart.components.pigment.dto.PigmentForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 import static com.mr13.colorchart.core.constants.URLConstant.PAINT_BASE_URL;
 import static com.mr13.colorchart.core.constants.URLConstant.PIGMENT_BASE_URL;
@@ -24,7 +25,8 @@ public class PaintPigmentController {
 
   @PostMapping("/{paintName}" + PIGMENT_BASE_URL)
   @ResponseStatus(HttpStatus.CREATED)
-  public void addPigmentToPaint(@PathVariable String paintName, @RequestBody PaintPigmentForm paintPigmentForm) {
+  public void addPigmentToPaint(@Valid @PathVariable String paintName,
+      @Valid @RequestBody PaintPigmentForm paintPigmentForm) {
     paintService.addPigmentToPaint(paintName, paintPigmentForm);
   }
 }

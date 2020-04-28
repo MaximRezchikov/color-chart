@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
+import static com.mr13.colorchart.core.constants.URLConstant.NAMES_URL;
+import static com.mr13.colorchart.core.constants.URLConstant.PRODUCER_BASE_URL;
+
 @RestController
-@RequestMapping("/producer")
+@RequestMapping(PRODUCER_BASE_URL)
 @RequiredArgsConstructor
 public class ProducerController extends CommonController<Producer> {
 
@@ -28,7 +32,7 @@ public class ProducerController extends CommonController<Producer> {
   private final ProducerServiceImpl producerServiceImpl;
   private final ProducerToProducerNameConverter producerToProducerNameConverter;
 
-  @GetMapping("/names")
+  @GetMapping(NAMES_URL)
   public List<String> getProducerNames() {
 
     List<Producer> allProducers = producerServiceImpl.getAll();
@@ -38,13 +42,13 @@ public class ProducerController extends CommonController<Producer> {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Producer saveProducer(@RequestBody ProducerForm producerForm) {
+  public Producer saveProducer(@Valid @RequestBody ProducerForm producerForm) {
     return producerService.save(producerForm);
   }
 
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Producer updateProducer(@PathVariable("id") Long producerId, @RequestBody ProducerForm producerForm) {
+  public Producer updateProducer(@PathVariable("id") Long producerId, @Valid @RequestBody ProducerForm producerForm) {
     return producerService.update(producerId, producerForm);
   }
 }

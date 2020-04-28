@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -38,13 +39,13 @@ public class PigmentController extends CommonController<Pigment> {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Pigment savePigment(@RequestBody PigmentForm pigmentForm) {
+  public Pigment savePigment(@Valid @RequestBody PigmentForm pigmentForm) {
     return pigmentService.save(pigmentForm);
   }
 
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Pigment updatePigment(@PathVariable("id") Long pigmentId, @RequestBody PigmentForm pigmentForm) {
+  public Pigment updatePigment(@PathVariable("id") Long pigmentId, @Valid @RequestBody PigmentForm pigmentForm) {
     return pigmentService.update(pigmentId, pigmentForm);
   }
 }

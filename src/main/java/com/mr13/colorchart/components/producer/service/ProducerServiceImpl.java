@@ -1,5 +1,6 @@
 package com.mr13.colorchart.components.producer.service;
 
+import com.mr13.colorchart.components.error.NotFoundException;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import com.mr13.colorchart.components.producer.dto.ProducerForm;
 import com.mr13.colorchart.components.producer.repo.ProducerRepository;
@@ -21,11 +22,13 @@ public class ProducerServiceImpl extends CommonService<Producer> implements Prod
   @Transactional
   public Producer save(ProducerForm producerForm) {
 
-    String name = producerForm.getProducerName();
-    String country = producerForm.getCountry();
+    String nameToUpperCase = producerForm.getProducerName();
+    String producerName = nameToUpperCase.toUpperCase();
+    String countryToUpperCase = producerForm.getCountry();
+    String country = countryToUpperCase.toUpperCase();
 
     Producer producer = Producer.builder()
-        .producerName(name)
+        .producerName(producerName)
         .country(country)
         .build();
 
@@ -40,12 +43,18 @@ public class ProducerServiceImpl extends CommonService<Producer> implements Prod
     String producerName = producerForm.getProducerName();
     String country = producerForm.getCountry();
 
-    Producer producerToChange = getOne(producerId);
+    if (exists(producerId)) {
 
-    producerToChange.setProducerName(producerName);
-    producerToChange.setCountry(country);
+      Producer producerToChange = getOne(producerId);
 
-    return producerRepository.save(producerToChange);
+      producerToChange.setProducerName(producerName);
+      producerToChange.setCountry(country);
+
+      return producerRepository.save(producerToChange);
+    }
+    else {
+      throw new NotFoundException();
+    }
   }
 
   @Override
