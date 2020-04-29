@@ -21,11 +21,13 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @EqualsAndHashCode(of = { "id" })
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class File {
+public class Picture {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private byte[] file;
+  private String name;
+
+  private byte[] picture;
 }

@@ -2,7 +2,7 @@ package com.mr13.colorchart.components.paint.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.mr13.colorchart.components.picture.domain.File;
+import com.mr13.colorchart.components.picture.domain.Picture;
 import com.mr13.colorchart.components.pigment.domain.Pigment;
 import com.mr13.colorchart.components.producer.domain.Producer;
 import lombok.AllArgsConstructor;
@@ -57,7 +57,7 @@ public class Paint {
 
   private Long producerId;
 
-  private Long fileId;
+  private Long pictureId;
 
   @Column(name = "serial_number")
   private Long paintSerialNumber;
@@ -85,8 +85,8 @@ public class Paint {
   private Producer producer;
 
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  @JoinColumn(name = "fileId", referencedColumnName = "id", insertable = false, updatable = false)
-  private File file;
+  @JoinColumn(name = "pictureId", referencedColumnName = "id", insertable = false, updatable = false)
+  private Picture picture;
 
   @JsonIgnore
   public boolean addPigment(Pigment pigment) {

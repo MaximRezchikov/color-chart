@@ -2,7 +2,7 @@
   <v-content>
     <v-container fill-height>
       <v-card-text>
-        <input class="v-input" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+        <input class="v-input" type="file" id="file" ref="picture" v-on:change="handleFileUpload()"/>
       </v-card-text>
         <v-btn rounded color="primary" v-on:click="submitFile()">Submit</v-btn>
     </v-container>

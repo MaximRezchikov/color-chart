@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class FileDto {
+public class PictureDto {
 
-  private byte[] file;
+  private byte[] picture;
 }

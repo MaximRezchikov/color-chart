@@ -1,7 +1,7 @@
 package com.mr13.colorchart.components.picture.service;
 
-import com.mr13.colorchart.components.picture.domain.File;
-import com.mr13.colorchart.components.picture.repo.FileRepository;
+import com.mr13.colorchart.components.picture.domain.Picture;
+import com.mr13.colorchart.components.picture.repo.PictureRepository;
 import com.mr13.colorchart.core.service.CommonService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -14,44 +14,46 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FilServiceImpl extends CommonService<File> implements FileService {
+public class PictureServiceImpl extends CommonService<Picture> implements PictureService {
 
-  private final FileRepository fileRepository;
+  private final PictureRepository pictureRepository;
 
   @Override
   @Transactional
   @SneakyThrows
   public void uploadFile(MultipartFile file) {
 
-    byte[] bytes = file.getBytes();
+    byte[] pictureBytes = file.getBytes();
+    String pictureName = file.getOriginalFilename();
 
-    File fileToSave = File.builder()
-        .file(bytes)
+    Picture pictureToSave = Picture.builder()
+        .picture(pictureBytes)
+        .name(pictureName)
         .build();
 
-    fileRepository.save(fileToSave);
+    pictureRepository.save(pictureToSave);
   }
 
   @Override
   @Transactional
-  public File getOne(Long entityId) {
+  public Picture getOne(Long entityId) {
     return super.getOne(entityId);
   }
 
   @Override
   @Transactional
-  public List<File> getAll() {
+  public List<Picture> getAll() {
     return super.getAll();
   }
 
   @Override
   @Transactional
-  public File delete(Long entityId) {
+  public Picture delete(Long entityId) {
     return super.delete(entityId);
   }
 
   @Override
-  public JpaRepository<File, Long> getRepository() {
-    return fileRepository;
+  public JpaRepository<Picture, Long> getRepository() {
+    return pictureRepository;
   }
 }

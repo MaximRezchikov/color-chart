@@ -104,7 +104,7 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
         .opacity(opacity)
         .staining(staining)
         .granulation(granulation)
-        .fileId(fileId)
+        .pictureId(fileId)
         .build();
 
     return paintRepository.save(paint);

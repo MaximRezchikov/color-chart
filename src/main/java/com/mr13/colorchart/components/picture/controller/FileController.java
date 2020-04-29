@@ -1,7 +1,7 @@
 package com.mr13.colorchart.components.picture.controller;
 
-import com.mr13.colorchart.components.picture.domain.File;
-import com.mr13.colorchart.components.picture.service.FileService;
+import com.mr13.colorchart.components.picture.domain.Picture;
+import com.mr13.colorchart.components.picture.service.PictureService;
 import com.mr13.colorchart.core.controller.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/file")
 @RequiredArgsConstructor
-public class FileController extends CommonController<File> {
+public class FileController extends CommonController<Picture> {
 
-  private final FileService fileService;
+  private final PictureService pictureService;
 
   @PostMapping
   public void uploadFile(@RequestParam("file") MultipartFile file) {
-    fileService.uploadFile(file);
+    pictureService.uploadFile(file);
   }
 }
