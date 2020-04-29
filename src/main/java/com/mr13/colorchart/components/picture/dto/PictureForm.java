@@ -2,10 +2,11 @@ package com.mr13.colorchart.components.picture.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
-public class PictureDto {
+public class PictureForm {
 
-  private byte[] picture;
+  private MultipartFile picture;
 }

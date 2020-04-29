@@ -1,6 +1,7 @@
 package com.mr13.colorchart.components.picture.service;
 
 import com.mr13.colorchart.components.picture.domain.Picture;
+import com.mr13.colorchart.components.picture.dto.PictureForm;
 import com.mr13.colorchart.components.picture.repo.PictureRepository;
 import com.mr13.colorchart.core.service.CommonService;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,12 @@ public class PictureServiceImpl extends CommonService<Picture> implements Pictur
   @Override
   @Transactional
   @SneakyThrows
-  public void uploadFile(MultipartFile file) {
+  public void uploadFile(PictureForm pictureForm) {
 
-    byte[] pictureBytes = file.getBytes();
-    String pictureName = file.getOriginalFilename();
+    MultipartFile pictureFile = pictureForm.getPicture();
+
+    byte[] pictureBytes = pictureFile.getBytes();
+    String pictureName = pictureFile.getOriginalFilename();
 
     Picture pictureToSave = Picture.builder()
         .picture(pictureBytes)
