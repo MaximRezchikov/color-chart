@@ -5,6 +5,8 @@ import com.mr13.colorchart.components.paint.domain.Paint;
 import com.mr13.colorchart.components.paint.dto.PaintForm;
 import com.mr13.colorchart.components.paint.dto.PaintPigmentForm;
 import com.mr13.colorchart.components.paint.repo.PaintRepository;
+import com.mr13.colorchart.components.picture.domain.Picture;
+import com.mr13.colorchart.components.picture.service.PictureService;
 import com.mr13.colorchart.components.pigment.domain.Pigment;
 import com.mr13.colorchart.components.pigment.service.PigmentServiceImpl;
 import com.mr13.colorchart.components.producer.domain.Producer;
@@ -27,6 +29,7 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
   private final PaintRepository paintRepository;
   private final ProducerServiceImpl producerService;
   private final PigmentServiceImpl pigmentService;
+  private final PictureService pictureService;
 
   @Override
   @Transactional
@@ -92,7 +95,9 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
     String producerName = paintForm.getProducerName();
     Producer producer = producerService.getByName(producerName);
     Long producerId = producer.getId();
-    Long fileId = paintForm.getFileId();
+    String pictureName = paintForm.getPictureName();
+    Picture picture = pictureService.getByName(pictureName);
+    Long pictureId = picture.getId();
 
     Paint paint = Paint.builder()
         .name(paintName)
@@ -104,7 +109,7 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
         .opacity(opacity)
         .staining(staining)
         .granulation(granulation)
-        .pictureId(fileId)
+        .pictureId(pictureId)
         .build();
 
     return paintRepository.save(paint);
@@ -125,6 +130,9 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
     String producerName = paintForm.getProducerName();
     Producer producer = producerService.getByName(producerName);
     Long producerId = producer.getId();
+    String pictureName = paintForm.getPictureName();
+    Picture picture = pictureService.getByName(pictureName);
+    Long pictureId = picture.getId();
 
     if (exists(paintId)) {
       Paint paintToChange = getOne(paintId);
@@ -138,6 +146,7 @@ public class PaintServiceImpl extends CommonService<Paint> implements PaintServi
       paintToChange.setStaining(staining);
       paintToChange.setGranulation(granulation);
       paintToChange.setProducerId(producerId);
+      paintToChange.setPictureId(pictureId);
 
       return paintRepository.save(paintToChange);
     }

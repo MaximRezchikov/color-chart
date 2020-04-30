@@ -22,7 +22,7 @@ public class PaintForm {
 
   private Long paintSerialNumber;
 
-  private Long fileId;
+  private String pictureName;
 
   @NotBlank
   private String lightfastness;

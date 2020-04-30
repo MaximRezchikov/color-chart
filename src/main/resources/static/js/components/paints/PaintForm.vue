@@ -4,12 +4,13 @@
       <v-container>
         <v-row>
           <v-col cols="10" sm="5">
-            <v-text-field
-                v-model="fileId"
-                type="number"
-                label="File ID"
-                placeholder="FileI D"
-                outlined></v-text-field>
+            <v-autocomplete
+                :items="pictureNameList"
+                :search-input.sync="pictureName"
+                color="green"
+                label="Picture Name"
+                outlined
+            ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
             <v-text-field
@@ -47,6 +48,7 @@
                 :search-input.sync="lightfastness"
                 color="green"
                 label="Lightfastness"
+                outlined
             ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
@@ -55,6 +57,7 @@
                 :search-input.sync="opacity"
                 color="green"
                 label="Opacity"
+                outlined
             ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
@@ -63,6 +66,7 @@
                 :search-input.sync="staining"
                 color="green"
                 label="Staining"
+                outlined
             ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
@@ -71,6 +75,7 @@
                 :search-input.sync="granulation"
                 color="green"
                 label="Granulation"
+                outlined
             ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
@@ -79,6 +84,7 @@
                 :search-input.sync="producerName"
                 color="green"
                 label="Producer Name"
+                outlined
             ></v-autocomplete>
           </v-col>
         </v-row>
@@ -90,6 +96,7 @@
                 :search-input.sync="paintName"
                 color="green"
                 label="Paint"
+                outlined
             ></v-autocomplete>
           </v-col>
           <v-col cols="10" sm="5">
@@ -99,6 +106,7 @@
                 multiple
                 color="green"
                 label="Pigment"
+                outlined
             ></v-select>
           </v-col>
         </v-row>
@@ -144,7 +152,8 @@
         paintName: '',
         pigmentList: [],
         pigmentIndexes: [],
-        fileId: '',
+        pictureNameList: [],
+        pictureName:'',
         id: '',
       }
     },
@@ -168,6 +177,12 @@
       }, error => {
         console.error(error);
       });
+      axios.get('http://localhost:8080/picture/names')
+      .then(result => {
+        this.pictureNameList = result.data
+      }, error => {
+        console.error(error);
+      });
     },
 
     watch: {
@@ -181,7 +196,7 @@
         this.staining = newVal.staining;
         this.granulation = newVal.granulation;
         this.producerName = newVal.producerName;
-        this.fileId = newVal.fileId;
+        this.pictureName = newVal.pictureName;
         this.id = newVal.id;
       },
       pigmentAttr(newVal, oldVal) {
@@ -200,7 +215,7 @@
           staining: this.staining,
           granulation: this.granulation,
           producerName: this.producerName,
-          fileId: this.fileId
+          pictureName: this.pictureName
         };
 
         if (this.id) {
@@ -218,7 +233,7 @@
                 this.granulation = '';
                 this.producerName = '';
                 this.id = '';
-                this.fileId = '';
+                this.pictureName = '';
               })
           )
         } else {
@@ -234,7 +249,7 @@
                 this.staining = '';
                 this.granulation = '';
                 this.producerName = '';
-                this.fileId = '';
+                this.pictureName = '';
               })
           )
         }

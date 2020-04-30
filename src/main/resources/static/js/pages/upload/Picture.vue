@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-card-title>
+      Upload your picture
+    </v-card-title>
+    <v-spacer></v-spacer>
     <picture-input
         ref="picture"
         @change="onChanged"
@@ -15,13 +19,28 @@
   drag: 'Drag and drop your image here'
   }">
     </picture-input>
-    <button @click="attemptUpload" v-bind:class="{ disabled: !picture }">
-      Upload
-    </button>
+    <div>
+      <v-btn class="ma-2" color="primary" @click="attemptUpload" v-bind:class="{ disabled: !picture }">
+        Upload
+      </v-btn>
+    </div>
+    <v-card
+        class="mx-auto"
+        max-width="200"
+        outlined
+        tile
+        v-for="item in pictureList" :key="item.picture"
+    >
+      <v-img :src="'data:image/jpg||bmp||jpeg||png;base64,' + item.picture" height="100" width="200"></v-img>
+      <v-card-title>{{item.name}}</v-card-title>
+      <v-btn class="ma-2" color="primary" @click="removePicture(item)">Delete</v-btn>
+      <v-spacer></v-spacer>
+    </v-card>
   </v-container>
 </template>
 
 <script>
+  import axios from "axios"
   import PictureInput from 'vue-picture-input'
   import FormDataPost from './upload.js'
 
@@ -29,11 +48,21 @@
     name: "Picture",
     data() {
       return {
-        picture: ''
+        name: '',
+        picture: '',
+        pictureList: []
       }
     },
     components: {
       PictureInput
+    },
+    mounted() {
+      axios.get('http://localhost:8080/picture')
+      .then(result => {
+        this.pictureList = result.data
+      }, error => {
+        console.error(error);
+      });
     },
     methods: {
       onChanged() {
@@ -59,6 +88,14 @@
           .catch(err => {
             console.error(err);
           });
+        }
+      },
+      removePicture(item) {
+        const index = this.pictureList.indexOf(item);
+        if (confirm('Are you sure you want to delete this picture?') && this.pictureList.splice(index, 1)) {
+          axios.delete('http://localhost:8080/picture/' + item.id, {
+            picture: this.pictureList.picture
+          })
         }
       }
     }

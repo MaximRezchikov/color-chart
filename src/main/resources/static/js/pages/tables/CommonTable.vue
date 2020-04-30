@@ -18,8 +18,8 @@
         :items-per-page="10"
         class="elevation-1"
     >
-      <template v-slot:item.file.file="{item}">
-        <v-img :src="'data:image/jpg||bmp||jpeg||png;base64,' + item.file.file" height="100" width="100"></v-img>
+      <template v-slot:item.picture.picture="{item}">
+        <v-img :src="'data:image/jpg||bmp||jpeg||png;base64,' + item.picture.picture" height="100" width="100"></v-img>
       </template>
     </v-data-table>
   </v-card>
@@ -41,7 +41,7 @@
             sortable: false,
             value: 'name',
           },
-          {text: 'Image', value: 'file.file'},
+          {text: 'Image', value: 'picture.picture'},
           {text: 'Company Number', value: 'companyColorNumber'},
           {text: 'Paint Serial Number', value: 'paintSerialNumber'},
           {text: 'Opacity', value: 'opacity'},

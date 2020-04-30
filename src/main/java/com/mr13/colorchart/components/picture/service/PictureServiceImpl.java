@@ -39,6 +39,12 @@ public class PictureServiceImpl extends CommonService<Picture> implements Pictur
 
   @Override
   @Transactional
+  public Picture getByName(String pictureName) {
+    return pictureRepository.getByName(pictureName);
+  }
+
+  @Override
+  @Transactional
   public Picture getOne(Long entityId) {
     return super.getOne(entityId);
   }
