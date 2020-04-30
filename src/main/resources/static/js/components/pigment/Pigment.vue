@@ -90,15 +90,19 @@
     },
 
     mounted() {
-      axios.get('http://localhost:8080/pigment')
-      .then(result => {
-        this.pigmentList = result.data
-      }, error => {
-        console.error(error);
-      });
+      this.getPigments()
     },
 
     methods: {
+
+      getPigments() {
+        axios.get('http://localhost:8080/pigment')
+        .then(result => {
+          this.pigmentList = result.data
+        }, error => {
+          console.error(error);
+        });
+      },
 
       showEditedDialog(item) {
         this.editedItem = item || {};
@@ -133,6 +137,8 @@
         } else {
           axios.post('http://localhost:8080/pigment', {
             pigmentIndex: this.pigmentList.pigmentIndex
+          }).then(result => {
+            this.pigmentList.push(this.getPigments())
           });
           this.pigmentList.pigmentIndex = ''
         }

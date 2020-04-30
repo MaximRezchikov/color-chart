@@ -57,14 +57,17 @@
       PictureInput
     },
     mounted() {
-      axios.get('http://localhost:8080/picture')
-      .then(result => {
-        this.pictureList = result.data
-      }, error => {
-        console.error(error);
-      });
+      this.getPictures()
     },
     methods: {
+      getPictures() {
+        axios.get('http://localhost:8080/picture')
+        .then(result => {
+          this.pictureList = result.data
+        }, error => {
+          console.error(error);
+        });
+      },
       onChanged() {
         console.log("New picture loaded");
         if (this.$refs.picture.file) {
@@ -80,10 +83,8 @@
         if (this.picture) {
           FormDataPost('http://localhost:8080/picture', this.picture)
           .then(response => {
-            if (response.data.success) {
-              this.picture = '';
-              console.log("Image uploaded successfully");
-            }
+            this.pictureList.push(this.getPictures());
+            this.picture = '';
           })
           .catch(err => {
             console.error(err);

@@ -153,7 +153,7 @@
         pigmentList: [],
         pigmentIndexes: [],
         pictureNameList: [],
-        pictureName:'',
+        pictureName: '',
         id: '',
       }
     },
@@ -171,18 +171,13 @@
       }, error => {
         console.error(error);
       });
-      axios.get('http://localhost:8080/paint/names')
-      .then(result => {
-        this.paintNameList = result.data
-      }, error => {
-        console.error(error);
-      });
       axios.get('http://localhost:8080/picture/names')
       .then(result => {
         this.pictureNameList = result.data
       }, error => {
         console.error(error);
       });
+      this.getPaintNames();
     },
 
     watch: {
@@ -204,6 +199,14 @@
       }
     },
     methods: {
+      getPaintNames() {
+        axios.get('http://localhost:8080/paint/names')
+        .then(result => {
+          this.paintNameList = result.data
+        }, error => {
+          console.error(error);
+        });
+      },
       save() {
         const paint = {
           name: this.name,
@@ -240,6 +243,7 @@
           this.$resource('/paint{/id}').save({}, paint).then(result =>
               result.json().then(data => {
                 this.paints.push(data);
+                this.paintNameList.push(this.getPaintNames());
                 this.name = '';
                 this.color = '';
                 this.companyColorNumber = '';
