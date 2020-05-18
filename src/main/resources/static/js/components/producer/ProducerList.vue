@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import axios from "axios"
   import ProducerRow from 'components/producer/ProducerRow.vue'
   import ProducerForm from 'components/producer/ProducerForm.vue'
 
@@ -24,15 +25,21 @@
     },
     data() {
       return {
-        producers: frontendData.producers
+        producers: ''
       }
     },
-    computed: {
-      sortedProducers() {
-        return this.producers.sort(sortByName)
-      }
+    mounted() {
+      this.getProducers();
     },
     methods: {
+      getProducers() {
+        axios.get('http://localhost:8080/producer')
+        .then(result => {
+          this.producers = result.data
+        }, error => {
+          console.error(error)
+        });
+      },
       editProducer(producer) {
         this.producer = producer
       },
@@ -44,9 +51,6 @@
         })
       }
     }
-  }
-  let sortByName = function (a, b) {
-    return (a.producerName.toLowerCase() > b.producerName.toLowerCase()) ? 1 : -1
   }
 
 </script>

@@ -32,13 +32,10 @@ public class MainController {
   @GetMapping
   public String main(Model model, @AuthenticationPrincipal ColorChartUserDetails user) {
 
-    List<Producer> allProducers = producerService.getAll();
-
     HashMap<Object, Object> data = new HashMap<>();
 
     if (user != null) {
       data.put("profile", user);
-      data.put("producers", allProducers);
     }
 
     model.addAttribute("frontendData", data);
