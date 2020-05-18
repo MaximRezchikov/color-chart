@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import axios from "axios"
   import PaintRow from 'components/paints/PaintRow.vue'
   import PaintForm from 'components/paints/PaintForm.vue'
 
@@ -25,10 +26,21 @@
     },
     data() {
       return {
-        paints: frontendData.paints
+        paints: ''
       }
     },
+    mounted() {
+      this.getPaints()
+    },
     methods: {
+      getPaints() {
+        axios.get('http://localhost:8080/paint')
+        .then(result => {
+          this.paints = result.data
+        }, error => {
+          console.error(error);
+        });
+      },
       editPaint(paint) {
         this.paint = paint
       },

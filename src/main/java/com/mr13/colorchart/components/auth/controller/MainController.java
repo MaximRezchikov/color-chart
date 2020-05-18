@@ -21,7 +21,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
-public class AuthController {
+public class MainController {
 
   private final ProducerServiceImpl producerService;
   private final PaintServiceImpl paintService;
@@ -33,14 +33,12 @@ public class AuthController {
   public String main(Model model, @AuthenticationPrincipal ColorChartUserDetails user) {
 
     List<Producer> allProducers = producerService.getAll();
-    List<Paint> allPaints = paintService.getAll();
 
     HashMap<Object, Object> data = new HashMap<>();
 
     if (user != null) {
       data.put("profile", user);
       data.put("producers", allProducers);
-      data.put("paints", allPaints);
     }
 
     model.addAttribute("frontendData", data);
