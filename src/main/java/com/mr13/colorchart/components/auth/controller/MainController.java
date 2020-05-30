@@ -26,7 +26,7 @@ public class MainController {
   private final ProducerServiceImpl producerService;
   private final PaintServiceImpl paintService;
 
-  @Value("${spring.profiles.active}")
+  @Value("${spring.profiles.active:prod}")
   private String profile;
 
   @GetMapping
